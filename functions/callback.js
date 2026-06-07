@@ -35,18 +35,45 @@ async function reportExists(date) {
   const response = await fetch(`${REPORT_URL}reports/index.json`);
   if (!response.ok) return false;
   const manifest = await response.json();
-  return Array.isArray(manifest.reports) && manifest.reports.includes(date);
+  return Array.isArray(manifest.reports) && manifest.reports.some((report) => report.date === date);
+}
+
+async function getReportManifest() {
+  const response = await fetch(`${REPORT_URL}reports/index.json`);
+  if (!response.ok) return { reports: [] };
+  return response.json();
+}
+
+function formatAvailableDates(manifest) {
+  const reports = Array.isArray(manifest.reports) ? manifest.reports : [];
+  if (!reports.length) return "目前尚無可查詢日期。";
+  return reports
+    .map((report) => {
+      const date = (report.date || "").replaceAll("-", "/");
+      const marketDate = report.marketResultDate ? `，採 ${report.marketResultDate}` : "";
+      return `- ${date}${marketDate}`;
+    })
+    .join("\n");
+}
+
+function findReport(manifest, date) {
+  const reports = Array.isArray(manifest.reports) ? manifest.reports : [];
+  return reports.find((report) => report.date === date);
 }
 
 async function buildReply(text) {
   const date = extractDate(text);
   if (date) {
-    if (await reportExists(date)) {
+    const manifest = await getReportManifest();
+    const report = findReport(manifest, date);
+    if (report) {
       const slashDate = date.replaceAll("-", "/");
-      return `台股報告已找到。\n\n這份是 ${slashDate} 的台股報告。\n\n點擊查看：\n${REPORT_URL}reports/${date}\n\n提醒：內容為研究與決策輔助，非投資報酬保證。`;
+      const marketDate = report.marketResultDate || MARKET_RESULT_DATE;
+      const label = report.label || `${slashDate} 台股報告`;
+      return `台股報告已找到。\n\n這份是 ${label}，內容採用 ${marketDate} 的台股結果與法人資料。\n\n點擊查看：\n${REPORT_URL}reports/${date}\n\n提醒：內容為研究與決策輔助，非投資報酬保證。`;
     }
     const slashDate = date.replaceAll("-", "/");
-    return `目前沒有 ${slashDate} 的台股報告。\n\n你可以輸入「台股」查看最新報告：\n${REPORT_URL}`;
+    return `目前沒有 ${slashDate} 的台股報告。\n\n目前可查詢日期：\n${formatAvailableDates(manifest)}\n\n你也可以輸入「台股」查看最新報告。`;
   }
 
   return `台股晨報已整理好。\n\n這份是 ${REPORT_LABEL}，內容採用 ${MARKET_RESULT_DATE} 的台股結果、法人買賣超與 00981A / 00403A ETF 觀察。\n\n點擊查看：\n${REPORT_URL}\n\n提醒：內容為研究與決策輔助，非投資報酬保證。`;
