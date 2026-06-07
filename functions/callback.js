@@ -32,9 +32,10 @@ function shouldReply(text) {
 }
 
 async function reportExists(date) {
-  const url = `${REPORT_URL}reports/${date}.html`;
-  const response = await fetch(url, { method: "HEAD" });
-  return response.ok;
+  const response = await fetch(`${REPORT_URL}reports/index.json`);
+  if (!response.ok) return false;
+  const manifest = await response.json();
+  return Array.isArray(manifest.reports) && manifest.reports.includes(date);
 }
 
 async function buildReply(text) {
@@ -42,7 +43,7 @@ async function buildReply(text) {
   if (date) {
     if (await reportExists(date)) {
       const slashDate = date.replaceAll("-", "/");
-      return `台股報告已找到。\n\n這份是 ${slashDate} 的台股報告。\n\n點擊查看：\n${REPORT_URL}reports/${date}.html\n\n提醒：內容為研究與決策輔助，非投資報酬保證。`;
+      return `台股報告已找到。\n\n這份是 ${slashDate} 的台股報告。\n\n點擊查看：\n${REPORT_URL}reports/${date}\n\n提醒：內容為研究與決策輔助，非投資報酬保證。`;
     }
     const slashDate = date.replaceAll("-", "/");
     return `目前沒有 ${slashDate} 的台股報告。\n\n你可以輸入「台股」查看最新報告：\n${REPORT_URL}`;
