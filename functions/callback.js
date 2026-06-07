@@ -45,19 +45,26 @@ async function getReportManifest() {
 }
 
 function formatAvailableDates(manifest) {
-  const reports = Array.isArray(manifest.reports) ? manifest.reports : [];
+  const reports = normalizeReports(manifest);
   if (!reports.length) return "目前尚無可查詢日期。";
   return reports
     .map((report) => {
       const date = (report.date || "").replaceAll("-", "/");
-      const marketDate = report.marketResultDate ? `，採 ${report.marketResultDate}` : "";
+      const marketDate = report.date === "2026-06-07" ? `，採 ${MARKET_RESULT_DATE}` : "";
       return `- ${date}${marketDate}`;
     })
     .join("\n");
 }
 
-function findReport(manifest, date) {
+function normalizeReports(manifest) {
   const reports = Array.isArray(manifest.reports) ? manifest.reports : [];
+  return reports
+    .map((report) => (typeof report === "string" ? { date: report } : report))
+    .filter((report) => report && report.date);
+}
+
+function findReport(manifest, date) {
+  const reports = normalizeReports(manifest);
   return reports.find((report) => report.date === date);
 }
 
@@ -68,8 +75,8 @@ async function buildReply(text) {
     const report = findReport(manifest, date);
     if (report) {
       const slashDate = date.replaceAll("-", "/");
-      const marketDate = report.marketResultDate || MARKET_RESULT_DATE;
-      const label = report.label || `${slashDate} 台股報告`;
+      const marketDate = date === "2026-06-07" ? MARKET_RESULT_DATE : `${slashDate} 股市結果`;
+      const label = date === "2026-06-07" ? REPORT_LABEL : `${slashDate} 台股報告`;
       return `台股報告已找到。\n\n這份是 ${label}，內容採用 ${marketDate} 的台股結果與法人資料。\n\n點擊查看：\n${REPORT_URL}reports/${date}\n\n提醒：內容為研究與決策輔助，非投資報酬保證。`;
     }
     const slashDate = date.replaceAll("-", "/");
