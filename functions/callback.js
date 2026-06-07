@@ -1,5 +1,5 @@
 const REPORT_URL = "https://taiwan-stock-report-16l.pages.dev/";
-const REPORT_LABEL = "2026/06/07 週日盤前觀察版";
+const REPORT_LABEL = "2026/06/08 盤前觀察版";
 const MARKET_RESULT_DATE = "2026/06/05 最近交易日";
 
 function extractDate(text) {
