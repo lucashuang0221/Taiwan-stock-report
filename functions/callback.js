@@ -5,7 +5,10 @@ const MARKET_RESULT_DATE = "2026/06/05 最近交易日";
 function shouldReply(text) {
   if (!text) return false;
   const normalized = text.toLowerCase();
+  const hasDate = /\b20\d{2}[\/-]\d{1,2}[\/-]\d{1,2}\b/.test(normalized);
+  if (hasDate) return true;
   return [
+    "台股",
     "台股報告",
     "台股晨報",
     "今日台股",
