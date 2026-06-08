@@ -35,10 +35,10 @@ async function buildReply(text) {
   const date = extractDate(text);
   if (date) {
     const displayDate = slashDate(date);
-    return `這份是 ${displayDate} 的台股日期報告。\n${REPORT_URL}report?date=${date}`;
+    return `這份是 ${displayDate} 的台股日期報告。 ${REPORT_URL}report?date=${date}`;
   }
 
-  return `這份是 ${LATEST_REPORT_DATE} 的台股日期報告。\n${REPORT_URL}`;
+  return `這份是 ${LATEST_REPORT_DATE} 的台股日期報告。 ${REPORT_URL}`;
 }
 
 async function replyToLine(replyToken, text, env) {
