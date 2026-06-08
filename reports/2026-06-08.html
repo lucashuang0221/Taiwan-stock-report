@@ -301,7 +301,9 @@
       overflow-x: auto;
       border: 1px solid var(--border);
       border-radius: 8px;
+      position: relative;
     }
+    .table-wrap::before { display: none; }
     table {
       width: 100%;
       min-width: 760px;
@@ -378,15 +380,85 @@
       font-size: 12px;
     }
     @media (max-width: 900px) {
-      .cover, .kpis, .summary, .grid-2, .strategy, .decision-strip, .thesis-grid { grid-template-columns: 1fr; }
+      body { background: #F8FAFC; }
+      .page {
+        width: 100%;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .cover, .summary, .grid-2, .strategy, .decision-strip, .thesis-grid { grid-template-columns: 1fr; }
       .cover { min-height: 0; }
-      .cover-main, .cover-detail { padding: 28px 20px; }
-      .cover-main { border-right: 0; border-bottom: 6px solid var(--blue); }
-      .content, .kpis, .footer { padding-left: 20px; padding-right: 20px; }
-      .decision-strip { padding-left: 20px; padding-right: 20px; }
-      h1 { font-size: 32px; }
-      .cover-card strong { font-size: 24px; }
-      .section-title { align-items: flex-start; flex-direction: column; }
+      .cover-main {
+        padding: 22px 18px;
+        border-right: 0;
+        border-bottom: 5px solid var(--blue);
+      }
+      .cover-detail { padding: 18px; gap: 12px; }
+      .eyebrow { font-size: 10px; margin-bottom: 10px; letter-spacing: 1px; }
+      h1 { font-size: 28px; line-height: 1.2; }
+      .subtitle { font-size: 13px; }
+      .meta-row { margin-top: 18px; gap: 6px; }
+      .meta-pill { font-size: 11px; padding: 4px 8px; }
+      .cover-card { padding: 16px; }
+      .cover-card strong { font-size: 21px; }
+      .cover-card span { font-size: 13px; }
+      .thesis { min-height: 0; padding: 12px; }
+      .kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        padding: 14px;
+      }
+      .kpi { min-height: 88px; padding: 12px 12px 12px 14px; }
+      .kpi .label { font-size: 11px; margin-bottom: 5px; }
+      .kpi .value { font-size: 20px; }
+      .decision-strip { padding: 14px; gap: 10px; }
+      .decision { padding: 12px; }
+      .decision strong { font-size: 15px; }
+      .decision p { font-size: 12px; }
+      .content { padding: 14px; }
+      section { margin-bottom: 14px; border-radius: 10px; }
+      .section-title {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+        padding: 14px;
+      }
+      .section-title h2 { font-size: 18px; }
+      .tag { font-size: 10px; }
+      .section-body { padding: 14px; }
+      .summary { gap: 9px; }
+      .summary li { padding: 12px; font-size: 14px; }
+      .card { padding: 13px; }
+      .card h3 { font-size: 16px; }
+      .card p { font-size: 14px; }
+      .table-wrap {
+        padding-top: 32px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .table-wrap::before {
+        content: "左右滑動看完整表格";
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        padding: 7px 10px;
+        background: #E0F2FE;
+        color: #075985;
+        font-size: 12px;
+        font-weight: 800;
+        border-bottom: 1px solid var(--border);
+      }
+      table { min-width: 860px; font-size: 13px; }
+      th, td { padding: 10px; }
+      .strategy-list li {
+        grid-template-columns: 64px 1fr;
+        gap: 8px;
+        font-size: 13px;
+      }
+      .footer { padding: 14px; font-size: 11px; }
     }
   </style>
 </head>
