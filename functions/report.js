@@ -289,6 +289,16 @@ export async function onRequestGet({ request }) {
   if (!date) {
     return new Response("Missing or invalid date. Use /report?date=YYYY-MM-DD", { status: 400 });
   }
+
+  const archivedUrl = new URL(`/reports/${date}`, request.url);
+  const archived = await fetch(archivedUrl);
+  if (archived.ok) {
+    const html = await archived.text();
+    return new Response(html, {
+      headers: { "Content-Type": "text/html; charset=utf-8" }
+    });
+  }
+
   const t86 = await fetchT86(date);
   return new Response(renderHtml({ date, t86 }), {
     headers: { "Content-Type": "text/html; charset=utf-8" }
