@@ -1,6 +1,5 @@
 const REPORT_URL = "https://taiwan-stock-report-16l.pages.dev/";
-const REPORT_LABEL = "2026/06/08 盤前觀察版";
-const MARKET_RESULT_DATE = "2026/06/05 最近交易日";
+const LATEST_REPORT_DATE = "2026/06/08";
 
 function extractDate(text) {
   if (!text) return null;
@@ -8,6 +7,10 @@ function extractDate(text) {
   if (!match) return null;
   const [, year, month, day] = match;
   return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+}
+
+function slashDate(date) {
+  return date.replaceAll("-", "/");
 }
 
 function shouldReply(text) {
@@ -31,28 +34,11 @@ function shouldReply(text) {
 async function buildReply(text) {
   const date = extractDate(text);
   if (date) {
-    const slashDate = date.replaceAll("-", "/");
-    return [
-      `這份是 ${slashDate} 的台股日期報告。`,
-      "",
-      "我會依你指定的日期產生頁面；若當天沒有開盤，頁面會顯示無交易資料與原因。",
-      "",
-      `點這裡看：${REPORT_URL}report?date=${date}`,
-      "",
-      "提醒：內容為研究與決策輔助，不保證投資報酬。"
-    ].join("\n");
+    const displayDate = slashDate(date);
+    return `這份是 ${displayDate} 的台股日期報告。\n${REPORT_URL}report?date=${date}`;
   }
 
-  return [
-    "這份是最新台股晨報。",
-    "",
-    `報告版本：${REPORT_LABEL}`,
-    `市場資料：${MARKET_RESULT_DATE}`,
-    "",
-    `點這裡看：${REPORT_URL}`,
-    "",
-    "提醒：內容為研究與決策輔助，不保證投資報酬。"
-  ].join("\n");
+  return `這份是 ${LATEST_REPORT_DATE} 的台股日期報告。\n${REPORT_URL}`;
 }
 
 async function replyToLine(replyToken, text, env) {
