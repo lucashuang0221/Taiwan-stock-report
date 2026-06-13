@@ -1,30 +1,47 @@
-const REPORT_URL = "https://taiwan-stock-report-16l.pages.dev/";
-const LATEST_REPORT_DATE = "2026/06/08";
+const REPORT_BASE_URL = "https://taiwan-stock-report-16l.pages.dev";
+
+function normalizeDateParts(year, month, day) {
+  return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+}
 
 function extractDate(text) {
   if (!text) return null;
-  const match = String(text).match(/\b(20\d{2})[\/-](\d{1,2})[\/-](\d{1,2})\b/);
-  if (!match) return null;
-  const [, year, month, day] = match;
-  return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+
+  const source = String(text);
+  const fullDate = source.match(/\b(20\d{2})[./-](\d{1,2})[./-](\d{1,2})\b/);
+  if (fullDate) {
+    return normalizeDateParts(fullDate[1], fullDate[2], fullDate[3]);
+  }
+
+  const zhDate = source.match(/\b(20\d{2})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日?\b/);
+  if (zhDate) {
+    return normalizeDateParts(zhDate[1], zhDate[2], zhDate[3]);
+  }
+
+  return null;
 }
 
 function slashDate(date) {
   return date.replaceAll("-", "/");
 }
 
+function reportUrlForDate(date) {
+  return `${REPORT_BASE_URL}/report?date=${date}`;
+}
+
 function shouldReply(text) {
   if (!text) return false;
   if (extractDate(text)) return true;
-  const normalized = text.toLowerCase();
+
+  const normalized = String(text).toLowerCase();
   return [
     "台股",
-    "台股報告",
+    "晨報",
     "台股晨報",
-    "今日台股",
-    "台股分析",
-    "法人買賣超",
-    "外資買賣超",
+    "法人",
+    "外資",
+    "投信",
+    "自營商",
     "00981a",
     "00403a",
     "etf"
@@ -33,12 +50,15 @@ function shouldReply(text) {
 
 async function buildReply(text) {
   const date = extractDate(text);
-  if (date) {
-    const displayDate = slashDate(date);
-    return `這份是 ${displayDate} 的台股日期報告。 ${REPORT_URL}report?date=${date}`;
+  if (!date) {
+    return "請指定報表日期，例如：台股晨報 2026-06-12";
   }
 
-  return `這份是 ${LATEST_REPORT_DATE} 的台股日期報告。 ${REPORT_URL}`;
+  return [
+    `已收到指定日期：${slashDate(date)}`,
+    "報表會依這個日期產出；若該日台股未開盤，內容會以最近可取得的市場資料作為基準。",
+    reportUrlForDate(date)
+  ].join("\n");
 }
 
 async function replyToLine(replyToken, text, env) {
@@ -82,5 +102,5 @@ export async function onRequestPost({ request, env }) {
 }
 
 export async function onRequestGet() {
-  return new Response("LINE callback is active.");
+  return new Response("LINE callback is active. Send a message with a date, for example: 台股晨報 2026-06-12");
 }

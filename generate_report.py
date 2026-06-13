@@ -5,9 +5,8 @@ import json
 import os
 import re
 import subprocess
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 from pathlib import Path
-from zoneinfo import ZoneInfo
 
 
 ROOT = Path(__file__).resolve().parent
@@ -17,14 +16,20 @@ MARKET_RESULT_DATE = ""
 
 
 def fetch_json(url: str) -> dict:
-    result = subprocess.run(
-        ["curl.exe", "-L", "-s", url],
-        check=True,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-    )
-    return json.loads(result.stdout)
+    last_error = None
+    for _ in range(3):
+        result = subprocess.run(
+            ["curl.exe", "-L", "-s", url],
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        try:
+            return json.loads(result.stdout)
+        except json.JSONDecodeError as exc:
+            last_error = exc
+    raise RuntimeError(f"Invalid JSON response from {url}: {last_error}")
 
 
 def fetch_text(url: str) -> str:
@@ -51,10 +56,6 @@ def normalize_date(value: str) -> str:
     return date.fromisoformat(value.replace("/", "-")).isoformat()
 
 
-def taipei_today() -> str:
-    return datetime.now(ZoneInfo("Asia/Taipei")).date().isoformat()
-
-
 def twse_mi_index_url(market_date: str) -> str:
     return (
         "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX"
@@ -78,6 +79,22 @@ def resolve_market_result_date(report_date: str, explicit_market_date: str | Non
         cursor -= timedelta(days=1)
 
     raise RuntimeError(f"Cannot find TWSE market data within 10 days before {report_date}")
+
+
+def extract_report_date_from_text(text: str | None) -> str | None:
+    if not text:
+        return None
+
+    source = str(text)
+    match = re.search(r"\b(20\d{2})[./-](\d{1,2})[./-](\d{1,2})\b", source)
+    if match:
+        return normalize_date("-".join(match.groups()))
+
+    zh_match = re.search(r"\b(20\d{2})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日?\b", source)
+    if zh_match:
+        return normalize_date("-".join(zh_match.groups()))
+
+    return None
 
 
 def load_market_index() -> dict:
@@ -112,6 +129,8 @@ def load_t86() -> dict:
         f"?date={MARKET_RESULT_DATE.replace('-', '')}&selectType=ALLBUT0999&response=json"
     )
     data = fetch_json(url)
+    if data.get("stat") != "OK" or "fields" not in data or "data" not in data:
+        raise RuntimeError(f"TWSE T86 unavailable for {MARKET_RESULT_DATE}: {data.get('stat', 'missing fields')}")
     fields = data["fields"]
     rows = [dict(zip(fields, row)) for row in data["data"]]
 
@@ -570,12 +589,17 @@ def write_outputs(html: str, line_text: str) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate Taiwan stock morning report.")
-    parser.add_argument("--report-date", default=taipei_today(), help="Report date in YYYY-MM-DD.")
+    parser.add_argument("--report-date", default=os.getenv("REPORT_DATE"), help="Report date in YYYY-MM-DD.")
     parser.add_argument("--market-result-date", default=None, help="TWSE market data date in YYYY-MM-DD.")
+    parser.add_argument("--line-text", default=os.getenv("LINE_TEXT"), help="Raw LINE text containing the requested date.")
     args = parser.parse_args()
 
     global REPORT_DATE, MARKET_RESULT_DATE
-    REPORT_DATE = normalize_date(args.report_date)
+    requested_date = args.report_date or extract_report_date_from_text(args.line_text)
+    if not requested_date:
+        raise SystemExit("Missing report date. Pass --report-date YYYY-MM-DD or --line-text containing a date.")
+
+    REPORT_DATE = normalize_date(requested_date)
     MARKET_RESULT_DATE = resolve_market_result_date(REPORT_DATE, args.market_result_date)
 
     market = load_market_index()
