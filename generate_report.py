@@ -1,17 +1,19 @@
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import re
 import subprocess
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 
 ROOT = Path(__file__).resolve().parent
-REPORT_DATE = "2026-06-12"
-MARKET_RESULT_DATE = "2026-06-11"
 PUBLIC_URL = "https://taiwan-stock-report-16l.pages.dev/"
+REPORT_DATE = ""
+MARKET_RESULT_DATE = ""
 
 
 def fetch_json(url: str) -> dict:
@@ -45,12 +47,41 @@ def to_float(text: str) -> float:
     return float(str(text).replace(",", "").replace("%", "").strip() or "0")
 
 
-def load_market_index() -> dict:
-    url = (
+def normalize_date(value: str) -> str:
+    return date.fromisoformat(value.replace("/", "-")).isoformat()
+
+
+def taipei_today() -> str:
+    return datetime.now(ZoneInfo("Asia/Taipei")).date().isoformat()
+
+
+def twse_mi_index_url(market_date: str) -> str:
+    return (
         "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX"
-        f"?date={MARKET_RESULT_DATE.replace('-', '')}&type=ALLBUT0999&response=json"
+        f"?date={market_date.replace('-', '')}&type=ALLBUT0999&response=json"
     )
-    data = fetch_json(url)
+
+
+def resolve_market_result_date(report_date: str, explicit_market_date: str | None) -> str:
+    if explicit_market_date:
+        return normalize_date(explicit_market_date)
+
+    cursor = date.fromisoformat(report_date)
+    for _ in range(10):
+        candidate = cursor.isoformat()
+        try:
+            data = fetch_json(twse_mi_index_url(candidate))
+        except Exception:
+            data = {}
+        if data.get("stat") == "OK":
+            return candidate
+        cursor -= timedelta(days=1)
+
+    raise RuntimeError(f"Cannot find TWSE market data within 10 days before {report_date}")
+
+
+def load_market_index() -> dict:
+    data = fetch_json(twse_mi_index_url(MARKET_RESULT_DATE))
     tables = data["tables"]
 
     price_index = next(t for t in tables if t.get("title", "").startswith("115年06月11日 價格指數"))
@@ -85,14 +116,14 @@ def load_t86() -> dict:
     rows = [dict(zip(fields, row)) for row in data["data"]]
 
     def top(column: str, reverse: bool) -> list[dict]:
-        sorted_rows = sorted(rows, key=lambda row: to_int(row[column]), reverse=reverse)
+        sorted_rows = sorted(rows, key=lambda row: to_int(row.get(column, "0")), reverse=reverse)
         result = []
         for row in sorted_rows[:10]:
             result.append(
                 {
-                    "code": row["證券代號"].strip(),
-                    "name": row["證券名稱"].strip(),
-                    "shares": to_int(row[column]),
+                    "code": row.get("證券代號", "").strip(),
+                    "name": row.get("證券名稱", "").strip(),
+                    "shares": to_int(row.get(column, "0")),
                 }
             )
         return result
@@ -538,6 +569,15 @@ def write_outputs(html: str, line_text: str) -> None:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Generate Taiwan stock morning report.")
+    parser.add_argument("--report-date", default=taipei_today(), help="Report date in YYYY-MM-DD.")
+    parser.add_argument("--market-result-date", default=None, help="TWSE market data date in YYYY-MM-DD.")
+    args = parser.parse_args()
+
+    global REPORT_DATE, MARKET_RESULT_DATE
+    REPORT_DATE = normalize_date(args.report_date)
+    MARKET_RESULT_DATE = resolve_market_result_date(REPORT_DATE, args.market_result_date)
+
     market = load_market_index()
     chips = load_t86()
     etf_a = parse_etf_page("00981A")
