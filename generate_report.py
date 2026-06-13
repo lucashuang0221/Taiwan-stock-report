@@ -63,6 +63,10 @@ def movement_from_pct(pct: str) -> dict:
 
 
 def normalize_date(value: str) -> str:
+    match = re.fullmatch(r"\s*(20\d{2})[./-](\d{1,2})[./-](\d{1,2})\s*", value)
+    if match:
+        year, month, day = match.groups()
+        return date(int(year), int(month), int(day)).isoformat()
     return date.fromisoformat(value.replace("/", "-")).isoformat()
 
 
@@ -98,11 +102,11 @@ def extract_report_date_from_text(text: str | None) -> str | None:
     source = str(text)
     match = re.search(r"\b(20\d{2})[./-](\d{1,2})[./-](\d{1,2})\b", source)
     if match:
-        return normalize_date("-".join(match.groups()))
+        return normalize_date(f"{match.group(1)}-{match.group(2)}-{match.group(3)}")
 
     zh_match = re.search(r"\b(20\d{2})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日?\b", source)
     if zh_match:
-        return normalize_date("-".join(zh_match.groups()))
+        return normalize_date(f"{zh_match.group(1)}-{zh_match.group(2)}-{zh_match.group(3)}")
 
     return None
 
@@ -236,6 +240,8 @@ def parse_etf_page(code: str) -> dict:
 
 GLOBAL_MARKET = {
     "date": "2026-06-11",
+    "line": "美股 6/11 強彈，S&P 500 +1.8%、Nasdaq +2.5%，晶片股回升，有利今晨情緒修復。",
+    "headline": "美股隔夜強彈有助今晨情緒修復",
     "summary": "美股在中東風險暫時降溫後強彈，晶片股帶頭回升，對台股今晨情緒偏正面，但反彈後追價風險同步升高。",
     "items": [
         "S&P 500 上漲 1.8% 至 7,394.30。",
@@ -246,6 +252,28 @@ GLOBAL_MARKET = {
     "source_label": "AP, 2026-06-11 U.S. market close roundup",
     "source_url": "https://apnews.com/article/f89a3d0e7e096199f393cf2d55da5e0e",
 }
+
+
+GLOBAL_MARKET_BY_REPORT_DATE = {
+    "2026-06-09": {
+        "date": "2026-06-08",
+        "line": "美股 6/8 走勢分歧，S&P 500 +0.3%、Nasdaq +0.9%、Dow -0.2%，AI 與半導體股反彈但油價仍偏高。",
+        "headline": "美股科技股反彈有助台股情緒修復",
+        "summary": "美股 6/8 收盤分歧，S&P 500 與 Nasdaq 由 AI、半導體族群反彈帶動回升，Dow 小跌；油價因地緣風險仍偏高，台股追價需控管波動。",
+        "items": [
+            "S&P 500 上漲 0.3% 至 7,405.73。",
+            "Nasdaq 上漲 0.9% 至 25,929.66。",
+            "Dow Jones 下跌 0.2% 至 50,786.01。",
+            "AI、晶片與記憶體相關股反彈，油價因以伊衝突仍有壓力。",
+        ],
+        "source_label": "AP, 2026-06-08 U.S. market close roundup",
+        "source_url": "https://apnews.com/article/bdfcaff60df7b2a2bd60b51ecf85d0ff",
+    },
+}
+
+
+def global_market_for_report() -> dict:
+    return GLOBAL_MARKET_BY_REPORT_DATE.get(REPORT_DATE, GLOBAL_MARKET)
 
 
 def format_shares(value: int) -> str:
@@ -324,11 +352,12 @@ def render_html(market: dict, chips: dict, etf_a: dict, etf_b: dict) -> str:
     trust_buy_top = chips["trust"]["buy"][:3]
     total_sell_top = chips["total"]["sell"][:3]
     weighted_move = movement_from_pct(market["weighted"]["pct"])
+    global_market = global_market_for_report()
 
     headline = (
         f"台股 {MARKET_RESULT_DATE} 收在 {market['weighted']['close']}，"
         f"{weighted_move['verb']} {market['weighted']['change']} 點（{weighted_move['pct']}%）；"
-        "美股隔夜強彈有助今晨情緒修復，但 00403A 與 00981A 仍見明顯法人調節，操作上宜偏分批。"
+        f"{global_market['headline']}，但 00403A 與 00981A 仍見明顯法人調節，操作上宜偏分批。"
     )
 
     return f"""<!DOCTYPE html>
@@ -485,11 +514,11 @@ def render_html(market: dict, chips: dict, etf_a: dict, etf_b: dict) -> str:
       </section>
       <section class="card">
         <h3>全球市場影響</h3>
-        <p class="muted">基準：{GLOBAL_MARKET['date']}</p>
+        <p class="muted">基準：{global_market['date']}</p>
         <ul class="bullets">
-          {''.join(f'<li>{item}</li>' for item in GLOBAL_MARKET['items'])}
+          {''.join(f'<li>{item}</li>' for item in global_market['items'])}
         </ul>
-        <p>{GLOBAL_MARKET['summary']}</p>
+        <p>{global_market['summary']}</p>
       </section>
     </div>
 
@@ -554,7 +583,7 @@ def render_html(market: dict, chips: dict, etf_a: dict, etf_b: dict) -> str:
 
     <div class="footer">
       <p>完整公開版：<a href="{PUBLIC_URL}">{PUBLIC_URL}</a></p>
-      <p>資料來源：TWSE MI_INDEX、TWSE T86、ETF資訊網成分股頁、{GLOBAL_MARKET['source_label']}。</p>
+      <p>資料來源：TWSE MI_INDEX、TWSE T86、ETF資訊網成分股頁、{global_market['source_label']}。</p>
     </div>
   </div>
 </body>
@@ -564,11 +593,12 @@ def render_html(market: dict, chips: dict, etf_a: dict, etf_b: dict) -> str:
 
 def build_line_message(market: dict) -> str:
     weighted_move = movement_from_pct(market["weighted"]["pct"])
+    global_market = global_market_for_report()
     return (
         f"台股晨報 {REPORT_DATE}\n\n"
         f"1. 台股基準日 {MARKET_RESULT_DATE} 加權指數收 {market['weighted']['close']}，"
         f"{weighted_move['verb']} {market['weighted']['change']} 點（{weighted_move['pct']}%）。\n"
-        "2. 美股 6/11 強彈，S&P 500 +1.8%、Nasdaq +2.5%，晶片股回升，有利今晨情緒修復。\n"
+        f"2. {global_market['line']}\n"
         "3. 外資對 00981A 小幅買超，但 00403A 仍遭大幅調節，主動式 ETF 以分批觀察為主。\n"
         "4. 投信買盤仍偏電子與金融，今天策略是不追高、等權值量價確認後再加碼。\n"
         "5. 風險在於台積電若無法續強，反彈容易轉震盪。\n\n"
