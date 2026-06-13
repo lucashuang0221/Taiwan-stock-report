@@ -52,6 +52,16 @@ def to_float(text: str) -> float:
     return float(str(text).replace(",", "").replace("%", "").strip() or "0")
 
 
+def movement_from_pct(pct: str) -> dict:
+    value = to_float(pct)
+    pct_abs = str(pct).replace("+", "").replace("-", "").strip()
+    if value > 0:
+        return {"verb": "上漲", "noun": "漲幅", "class": "pos", "pct": pct_abs}
+    if value < 0:
+        return {"verb": "下跌", "noun": "跌幅", "class": "neg", "pct": pct_abs}
+    return {"verb": "持平", "noun": "變動", "class": "", "pct": pct_abs}
+
+
 def normalize_date(value: str) -> str:
     return date.fromisoformat(value.replace("/", "-")).isoformat()
 
@@ -101,12 +111,26 @@ def load_market_index() -> dict:
     data = fetch_json(twse_mi_index_url(MARKET_RESULT_DATE))
     tables = data["tables"]
 
-    price_index = next(t for t in tables if t.get("title", "").startswith("115年06月11日 價格指數"))
-    weighted = next(row for row in price_index["data"] if row[0] == "發行量加權股價指數")
-    semiconductor = next(row for row in price_index["data"] if row[0] == "半導體類指數")
-    electronics = next(row for row in price_index["data"] if row[0] == "電子工業類指數")
-    finance = next(row for row in price_index["data"] if row[0] == "金融保險類指數")
-    shipping = next(row for row in price_index["data"] if row[0] == "航運類指數")
+    def find_table() -> dict:
+        for table in tables:
+            rows = table.get("data", [])
+            if any(row and row[0] == "發行量加權股價指數" for row in rows):
+                return table
+        raise RuntimeError(f"Cannot find TWSE price index table for {MARKET_RESULT_DATE}")
+
+    def find_row(rows: list, name: str) -> list:
+        for row in rows:
+            if row and row[0] == name:
+                return row
+        raise RuntimeError(f"Cannot find TWSE index row '{name}' for {MARKET_RESULT_DATE}")
+
+    price_index = find_table()
+    rows = price_index["data"]
+    weighted = find_row(rows, "發行量加權股價指數")
+    semiconductor = find_row(rows, "半導體類指數")
+    electronics = find_row(rows, "電子工業類指數")
+    finance = find_row(rows, "金融保險類指數")
+    shipping = find_row(rows, "航運類指數")
 
     return {
         "weighted": {
@@ -299,10 +323,11 @@ def render_html(market: dict, chips: dict, etf_a: dict, etf_b: dict) -> str:
     foreign_sell_top = chips["foreign"]["sell"][:3]
     trust_buy_top = chips["trust"]["buy"][:3]
     total_sell_top = chips["total"]["sell"][:3]
+    weighted_move = movement_from_pct(market["weighted"]["pct"])
 
     headline = (
         f"台股 {MARKET_RESULT_DATE} 收在 {market['weighted']['close']}，"
-        f"下跌 {market['weighted']['change']} 點（{market['weighted']['pct']}%）；"
+        f"{weighted_move['verb']} {market['weighted']['change']} 點（{weighted_move['pct']}%）；"
         "美股隔夜強彈有助今晨情緒修復，但 00403A 與 00981A 仍見明顯法人調節，操作上宜偏分批。"
     )
 
@@ -444,7 +469,7 @@ def render_html(market: dict, chips: dict, etf_a: dict, etf_b: dict) -> str:
         <div class="hero-card"><span>晨報日期</span><strong>{REPORT_DATE}</strong></div>
         <div class="hero-card"><span>台股基準日</span><strong>{MARKET_RESULT_DATE}</strong></div>
         <div class="hero-card"><span>加權指數</span><strong>{market['weighted']['close']}</strong></div>
-        <div class="hero-card"><span>單日變動</span><strong class="neg">{market['weighted']['pct']}%</strong></div>
+        <div class="hero-card"><span>單日變動</span><strong class="{weighted_move['class']}">{market['weighted']['pct']}%</strong></div>
       </div>
     </section>
 
@@ -453,7 +478,7 @@ def render_html(market: dict, chips: dict, etf_a: dict, etf_b: dict) -> str:
       <section class="card">
         <h3>台股指數重點</h3>
         <ul class="bullets">
-          <li>加權指數收在 {market['weighted']['close']}，下跌 {market['weighted']['change']} 點，跌幅 {market['weighted']['pct']}%。</li>
+          <li>加權指數收在 {market['weighted']['close']}，{weighted_move['verb']} {market['weighted']['change']} 點，{weighted_move['noun']} {weighted_move['pct']}%。</li>
           <li>半導體類指數 {market['sectors'][0]['pct']}%，電子類 {market['sectors'][1]['pct']}%，金融類 {market['sectors'][2]['pct']}%，航運類 {market['sectors'][3]['pct']}%。</li>
           <li>盤面呈現「權值整理、金融與航運撐盤」結構，表示資金並未全面撤出，只是高位轉倉。</li>
         </ul>
@@ -538,10 +563,11 @@ def render_html(market: dict, chips: dict, etf_a: dict, etf_b: dict) -> str:
 
 
 def build_line_message(market: dict) -> str:
+    weighted_move = movement_from_pct(market["weighted"]["pct"])
     return (
         f"台股晨報 {REPORT_DATE}\n\n"
         f"1. 台股基準日 {MARKET_RESULT_DATE} 加權指數收 {market['weighted']['close']}，"
-        f"下跌 {market['weighted']['change']} 點（{market['weighted']['pct']}%）。\n"
+        f"{weighted_move['verb']} {market['weighted']['change']} 點（{weighted_move['pct']}%）。\n"
         "2. 美股 6/11 強彈，S&P 500 +1.8%、Nasdaq +2.5%，晶片股回升，有利今晨情緒修復。\n"
         "3. 外資對 00981A 小幅買超，但 00403A 仍遭大幅調節，主動式 ETF 以分批觀察為主。\n"
         "4. 投信買盤仍偏電子與金融，今天策略是不追高、等權值量價確認後再加碼。\n"
