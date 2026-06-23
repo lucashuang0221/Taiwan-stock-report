@@ -19,21 +19,22 @@ MARKET_RESULT_DATE = ""
 
 
 GLOBAL_MARKET = {
-    "date": "2026-06-18",
-    "headline": "美股因 Juneteenth 休市，盤前參考 6/18 收盤：Nasdaq +1.9%、費半 +6.42%，AI 與半導體風險偏好回溫。",
+    "date": "2026-06-22",
+    "headline": "美股 6/22 漲跌互見：Nasdaq -1.32%、S&P 500 -0.37%，但費半 +2.04%續創高；對台股是「權值半導體偏正向、科技大型股情緒偏分歧」的組合。",
     "items": [
-        "美股四大指數：S&P 500 收 7,500.58（+1.1%）、Nasdaq 收 26,517.93（+1.9%）、Dow 收 51,564.70（+0.1%）、Russell 2000 收 2,979.77（+2.1%）。",
-        "費半指數：SOX 收 14,341.78（+6.42%），直接支撐台股 AI、半導體、PCB、散熱與伺服器鏈。",
-        "美債殖利率：10 年期約 4.43%-4.46%，殖利率回落有利成長股估值，但 Fed 仍偏鷹，需防止利率預期反覆。",
-        "原油與黃金：油價受美伊協議與荷莫茲海峽重新開放消息影響震盪，黃金未取得明確避險延續訊號；對台股主軸影響低於半導體與匯率。",
-        "VIX：6/18 收 16.40，較前一日回落 11.06%，顯示風險偏好改善，但非低到可忽略風險。",
-        "Fed 政策：利率不確定性仍是估值壓力來源，若後續通膨或官員談話再度偏鷹，高本益比 AI 股容易震盪。",
+        "美股四大指數：S&P 500 收 7,472.79（-0.37%）、Nasdaq 收 26,166.60（-1.32%）、Dow 收 51,712.71（+0.29%）、Russell 2000 收 3,004.40（+0.8%）。",
+        "費半指數：SOX 收 14,634.72（+2.04%）並再創新高，直接支撐台股半導體、AI 伺服器、PCB、散熱與高階零組件。",
+        "美債殖利率：10 年期約 4.49%-4.51%，短端殖利率升至高檔，代表 Fed 偏鷹預期仍壓抑高本益比科技股估值。",
+        "原油與黃金：美伊談判降溫使油價回落，WTI 約 73.86 美元、Brent 約 77.52 美元；油價回落有助通膨預期，但債券殖利率未同步下降。",
+        "VIX：6/22 收 17.28，較前一交易日上升，顯示市場對科技股與利率變數仍有避險需求。",
+        "AI 與大型科技：費半續強但 Alphabet、Amazon、Broadcom 等大型科技轉弱，台股今日應偏向篩選半導體強勢鏈，不宜把所有科技股視為同步轉強。",
+        "Fed 政策：市場重新定價升息風險，若本週 PCE 或 Fed 官員談話偏鷹，AI 與高估值權值股容易出現獲利了結。",
     ],
     "sources": [
-        ("AP 6/18 美股收盤", "https://apnews.com/article/411ec68891aa5dc7d7f684e0305e2aa3"),
-        ("MarketWatch SOX", "https://www.marketwatch.com/investing/index/sox"),
+        ("AP 6/22 美股收盤", "https://apnews.com/article/15484e7e5b168601a3f2c0061eb3ffd1"),
+        ("經濟日報 6/22 費半與科技股", "https://money.udn.com/money/story/123398/9582116"),
         ("Cboe VIX", "https://www.cboe.com/tradable-products/vix/"),
-        ("WSJ / Treasury yields", "https://www.wsj.com/finance/jgbs-fall-tracking-declines-in-u-s-treasurys-0c086030"),
+        ("MarketWatch / Treasury yields", "https://www.marketwatch.com/livecoverage/stock-market-today-dow-s-p-500-investors-us-iran-peace-talks-brent-crude-declines/card/2-year-treasury-yield-climbs-to-levels-not-seen-since-early-2025-RmqjsbC1HLyOJItaIJxe"),
     ],
 }
 
@@ -537,14 +538,14 @@ def render_html(market: dict, chips: dict, etf_a: dict, etf_b: dict) -> str:
     <section class="hero">
       <span class="badge">研究與決策支援，不保證投資報酬</span>
       <h1>台股晨間投資報告 {REPORT_DATE}</h1>
-      <p>報告日為 {REPORT_DATE}，因 6/20 為週六且 6/19 無 TWSE 交易資料，本版採用最新可取得的 {MARKET_RESULT_DATE} 台股收盤與法人資料；美股因 6/19 Juneteenth 休市，採用 6/18 收盤作為國際盤前參考。</p>
+      <p>報告日為 {REPORT_DATE}，本版採用最新可取得的 {MARKET_RESULT_DATE} 台股收盤與法人資料，並納入 2026-06-22 美股收盤作為今日盤前國際市場參考。</p>
       <div class="kpis">
         <div class="kpi"><span>加權指數</span><strong>{weighted['close']}</strong></div>
         <div class="kpi"><span>日漲跌</span><strong class="{move_class}">{weighted['change']} / {weighted['pct']}%</strong></div>
         <div class="kpi"><span>台灣 50</span><strong>{market['tw50']['pct']}%</strong></div>
         <div class="kpi"><span>外資買超焦點</span><strong>{foreign_focus['name']}</strong></div>
         <div class="kpi"><span>外資賣超焦點</span><strong>{foreign_sell['name']}</strong></div>
-        <div class="kpi"><span>美股關鍵</span><strong>費半 +6.42%</strong></div>
+        <div class="kpi"><span>美股關鍵</span><strong>費半 +2.04%</strong></div>
       </div>
     </section>
 
@@ -557,8 +558,8 @@ def render_html(market: dict, chips: dict, etf_a: dict, etf_b: dict) -> str:
     <h2>1. 今日市場結論</h2>
     <section class="card">
       <ul>
-        <li>加權指數 {pct_word(weighted['pct'])} {weighted['pct']}%，短線氣氛偏多；但報告日非交易日，今日策略應以「下週開盤情境」解讀。</li>
-        <li>美股 6/18 科技股與半導體明顯反彈，對台積電、AI 伺服器、PCB、散熱與電源鏈是正向外部訊號。</li>
+        <li>加權指數 {pct_word(weighted['pct'])} {weighted['pct']}%，短線氣氛偏多；但今日盤前美股科技大型股分歧，操作要等開盤量價確認。</li>
+        <li>美股 6/22 費半續創高，對台積電、AI 伺服器、PCB、散熱與電源鏈偏正向；Nasdaq 回落則提醒高估值科技股不能無差別追價。</li>
         <li>外資買賣超需分辨 ETF 與現股：若買超集中在 ETF，代表資金偏配置；若同步買進半導體與 AI 零組件，才是主動風險承擔。</li>
         <li>今日可觀察支撐位約 {support}，壓力位約 {resistance}；若開高未放量，避免追價。</li>
         <li>盤勢預估：偏多震盪。短線只做回測承接，不做連續急漲後的高檔追單。</li>
@@ -580,7 +581,7 @@ def render_html(market: dict, chips: dict, etf_a: dict, etf_b: dict) -> str:
         <ul>
           <li>加權指數趨勢：{weighted['close']}，{pct_word(weighted['pct'])} {weighted['change']} 點，短線偏多。</li>
           <li>OTC 趨勢：本次 TWSE API 未提供 OTC 即時欄位，需以櫃買中心最新資料交叉確認。</li>
-          <li>台積電對大盤影響：台積電同時是 00981A、00403A 最大權重股，且費半大漲，對台股權值與 ETF 淨值均為關鍵。</li>
+          <li>台積電對大盤影響：台積電同時是 00981A、00403A 最大權重股，且費半續創高，對台股權值與 ETF 淨值均為關鍵。</li>
           <li>外資期貨未平倉方向：本次未取得 TAIFEX 未平倉資料，列為待確認；現貨外資流向先作為替代觀察。</li>
           <li>台幣匯率影響：資料不足；若台幣走強，有利外資回補權值股，若快速貶值則壓抑估值。</li>
           <li>市場情緒：偏多震盪。支撐 {support}，壓力 {resistance}。</li>
@@ -663,7 +664,7 @@ def render_html(market: dict, chips: dict, etf_a: dict, etf_b: dict) -> str:
 
     <h2>8. 今日風險提醒</h2>
     <section class="card">
-      <div class="alert risk">最大風險：報告日與最新資料日不同，且美股休市後下一個交易日可能出現補量波動；若下週開盤跳空過大，短線勝率下降。</div>
+      <div class="alert risk">最大風險：台股前一日強漲後，今日若開高但量能無法延續，容易出現獲利了結；同時美股科技大型股轉弱，可能壓抑追價意願。</div>
       <ul>
         <li>可能利空：Fed 偏鷹談話、美元或美債殖利率再度上行、AI 股估值過熱後回檔。</li>
         <li>市場過熱訊號：成交量放大但指數開高走低、外資現貨轉賣、ETF 折溢價快速擴大。</li>
@@ -690,8 +691,8 @@ def build_line_message(market: dict, chips: dict, etf_a: dict, etf_b: dict) -> s
         f"台股晨報 {REPORT_DATE}\n"
         f"採用最新交易資料：{MARKET_RESULT_DATE}\n\n"
         f"1. 加權指數 {weighted['close']}，{pct_word(weighted['pct'])} {weighted['change']} 點（{weighted['pct']}%），盤勢偏多震盪。\n"
-        "2. 美股 6/19 休市，參考 6/18 收盤：S&P 500 +1.1%、Nasdaq +1.9%、費半 +6.42%，AI/半導體對台股偏正向。\n"
-        f"3. 外資買超焦點：{chips['foreign']['buy'][0]['name']}；外資賣超焦點：{chips['foreign']['sell'][0]['name']}，下週需確認是否延續。\n"
+        "2. 美股 6/22 漲跌互見：S&P 500 -0.37%、Nasdaq -1.32%、Dow +0.29%，費半 +2.04%續創高；台股半導體偏正向，但科技股追價要保守。\n"
+        f"3. 外資買超焦點：{chips['foreign']['buy'][0]['name']}；外資賣超焦點：{chips['foreign']['sell'][0]['name']}，今日需確認是否延續。\n"
         f"4. 00981A 市價 {etf_a['price']}、前十大集中度約 {fmt_float(sum(to_float(h['weight']) for h in etf_a['top_holdings']))}%；00403A 市價 {etf_b['price']}、前十大集中度約 {fmt_float(sum(to_float(h['weight']) for h in etf_b['top_holdings']))}%。\n"
         "5. 策略：保守者等回測，穩健者分批配置 ETF，積極者只追法人買超且放量延續股；開高走低不加碼。\n\n"
         f"完整報告：{PUBLIC_URL}\n"
