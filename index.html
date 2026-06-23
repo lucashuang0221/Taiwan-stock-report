@@ -1,807 +1,223 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>台股晨間投資報告 2026-06-23</title>
+  <title>桃園市桃園區正光路133號｜專業投資人初評備忘錄</title>
   <style>
-    :root {
-      --navy:#0f172a; --blue:#38bdf8; --bg:#f8fafc; --line:#cbd5e1;
-      --green:#10b981; --orange:#f59e0b; --red:#ef4444; --ink:#111827; --muted:#64748b;
+    :root{
+      --paper:#f4f0e8;--panel:#fffdf8;--ink:#1f252b;--muted:#77736b;--line:#c8bfae;
+      --charcoal:#252a2f;--teal:#236b68;--wine:#8b3f42;--ochre:#b9852e;--sage:#6d8066;
+      --soft:#fbf7ee;--green:#dce9e5;--amber:#f0e3c9;--red:#eadadb;--shadow:0 16px 32px rgba(37,42,47,.08);
     }
-    * { box-sizing:border-box; }
-    body { margin:0; font-family:"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif; background:var(--bg); color:var(--ink); line-height:1.65; }
-    .page { max-width:1180px; margin:0 auto; padding:20px 14px 48px; }
-    .hero { background:linear-gradient(135deg,#0f172a,#123052 58%,#0e7490); color:#fff; border-radius:8px; padding:24px; }
-    .badge { display:inline-flex; padding:5px 10px; border:1px solid rgba(255,255,255,.35); border-radius:999px; font-size:12px; color:#dbeafe; }
-    h1 { margin:12px 0 8px; font-size:32px; line-height:1.2; letter-spacing:0; }
-    h2 { margin:28px 0 12px; font-size:22px; color:var(--navy); }
-    h3 { margin:0; font-size:17px; color:var(--navy); }
-    .hero p { margin:0; max-width:920px; color:#e0f2fe; }
-    .kpis { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; margin-top:18px; }
-    .kpi { background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); border-radius:8px; padding:12px; min-height:86px; }
-    .kpi span,.card-head span,.muted { color:var(--muted); font-size:12px; }
-    .kpi span { color:#bae6fd; }
-    .kpi strong { display:block; margin-top:4px; font-size:21px; color:#fff; }
-    .read-order { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; background:#111827; border-radius:8px; padding:14px; margin-top:14px; }
-    .read-order div { color:#e5e7eb; }
-    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
-    .card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:14px; }
-    .card-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
-    .alert { border-left:4px solid var(--blue); background:#f8fafc; padding:12px; border-radius:6px; margin:10px 0; }
-    .alert.warn { border-left-color:var(--orange); }
-    .alert.risk { border-left-color:var(--red); }
-    .alert.good { border-left-color:var(--green); }
-    ul { margin:0; padding-left:20px; }
-    .table-wrap { overflow-x:auto; }
-    table { width:100%; border-collapse:collapse; min-width:760px; font-size:14px; }
-    th { background:var(--navy); color:#fff; text-align:left; padding:10px 12px; }
-    td { border-bottom:1px solid var(--line); padding:10px 12px; vertical-align:top; }
-    tbody tr:nth-child(even) { background:#f8fafc; }
-    td span { color:var(--muted); font-size:12px; }
-    .pos { color:var(--green); font-weight:700; }
-    .neg { color:var(--red); font-weight:700; }
-    .neu { color:var(--muted); font-weight:700; }
-    .footer { margin-top:22px; color:var(--muted); font-size:13px; }
-    a { color:#0369a1; }
-    @media (max-width:900px) {
-      .kpis,.grid,.read-order { grid-template-columns:1fr 1fr; }
-      h1 { font-size:27px; }
-    }
-    @media (max-width:640px) {
-      .kpis,.grid,.read-order { grid-template-columns:1fr; }
-      .hero { padding:18px; }
-      table { min-width:720px; }
-    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:"Microsoft JhengHei","Noto Sans TC",Arial,sans-serif;line-height:1.62}
+    a{color:var(--teal)}
+    h1,h2,h3,p,figure{margin:0}
+    .wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+    .topbar{background:var(--charcoal);color:#fffdf8;border-bottom:6px solid var(--wine)}
+    .hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:34px;padding:42px 0 34px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:#f0e3c9;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+    .eyebrow:before{content:"";width:34px;height:2px;background:var(--ochre)}
+    h1{font-size:clamp(30px,5vw,56px);line-height:1.08;letter-spacing:0}
+    h2{font-size:clamp(24px,3vw,34px);line-height:1.2}
+    .hero-copy{margin-top:18px;color:#ddd7ca;font-size:18px;max-width:780px}
+    .hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+    .pill{display:inline-flex;align-items:center;min-height:34px;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,253,248,.24);background:rgba(255,255,255,.06);color:#fffdf8;font-size:13px}
+    .hero-card,.card{background:var(--panel);border:1px solid rgba(200,191,174,.65);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;color:var(--ink)}
+    .hero-card img{width:100%;height:230px;object-fit:cover;background:#d8d0c2}
+    .caption,figcaption{padding:13px 15px;color:var(--muted);font-size:13px}
+    main{padding:28px 0 56px}
+    section{margin-top:28px}
+    .section-head{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:16px}
+    .section-note{max-width:560px;color:var(--muted);font-size:14px}
+    .grid{display:grid;gap:16px}.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}.wide{grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr)}
+    .pad{padding:20px}.kpi{min-height:150px;display:flex;flex-direction:column;justify-content:space-between;border-top:5px solid var(--teal)}
+    .kpi:nth-child(2){border-top-color:var(--wine)}.kpi:nth-child(3){border-top-color:var(--ochre)}.kpi:nth-child(4){border-top-color:var(--sage)}
+    .label{color:var(--muted);font-size:13px}.value{margin-top:8px;font-size:clamp(25px,3vw,36px);font-weight:800;line-height:1.05;color:var(--charcoal)}.sub{margin-top:10px;color:var(--muted);font-size:13px}
+    .asset-title{display:flex;gap:10px;align-items:center;margin-bottom:10px;font-size:20px;font-weight:800}.dot{width:12px;height:12px;border-radius:999px;background:var(--teal);flex:0 0 auto}.dot.wine{background:var(--wine)}.dot.ochre{background:var(--ochre)}.dot.sage{background:var(--sage)}
+    .tag{display:inline-flex;align-items:center;min-height:28px;padding:4px 9px;border-radius:999px;font-size:12px;font-weight:800;background:var(--green);color:var(--teal)}.tag.warn{background:var(--amber);color:#7a560c}.tag.risk{background:var(--red);color:var(--wine)}
+    .decision{border-left:6px solid var(--wine);background:var(--soft)}
+    .score{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;margin-top:12px}.bar{height:10px;border-radius:999px;background:#e8e0d3;overflow:hidden}.fill{height:100%;border-radius:999px;background:var(--teal)}.fill.wine{background:var(--wine)}.fill.ochre{background:var(--ochre)}.fill.sage{background:var(--sage)}
+    .table-wrap{overflow-x:auto}.matrix{width:100%;border-collapse:collapse;min-width:840px}th,td{padding:13px 14px;border-bottom:1px solid rgba(200,191,174,.72);vertical-align:top;text-align:left;font-size:14px}th{background:#f4ead9;font-weight:800}
+    .map-toolbar{display:flex;flex-wrap:wrap;gap:10px;padding:16px;border-bottom:1px solid var(--line);background:#faf5eb}.map-btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:9px 13px;font:inherit;font-size:14px;cursor:pointer}.map-btn.active{background:var(--teal);border-color:var(--teal);color:#fff}
+    .map-stage{min-height:500px;overflow:hidden;background:linear-gradient(135deg,rgba(35,107,104,.08),transparent 42%),linear-gradient(45deg,rgba(185,133,46,.12),transparent 45%),#f7f1e7}.map-stage svg{width:100%;height:500px;display:block}.heat{opacity:0;transition:opacity .22s ease}.heat.active{opacity:1}
+    .legend{display:grid;gap:10px;padding:18px}.swatch{height:12px;border-radius:999px;background:linear-gradient(90deg,rgba(109,128,102,.35),rgba(185,133,46,.65),rgba(139,63,66,.9))}.callout{display:grid;gap:10px;border-left:5px solid var(--wine);background:var(--soft);padding:18px;border-radius:0 12px 12px 0}
+    figure img,.visual{width:100%;height:215px;object-fit:cover;background:#e4dccf}.visual{display:grid;place-items:center;padding:16px;background:linear-gradient(135deg,rgba(35,107,104,.18),transparent 55%),linear-gradient(45deg,rgba(139,63,66,.12),transparent 55%),#efe6d6}.mini-map{width:100%;max-width:330px;aspect-ratio:1.3;border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:10px}
+    .source-list{display:grid;gap:8px;font-size:14px;color:var(--muted)}.footer{margin-top:34px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:18px}
+    @media(max-width:920px){.hero,.wide,.two,.three,.kpis{grid-template-columns:1fr}.section-head{display:grid}.map-stage,.map-stage svg{min-height:420px;height:420px}}
+    @media(max-width:560px){.wrap{width:min(100% - 24px,1180px)}.pad{padding:16px}.score{grid-template-columns:92px 1fr}.map-stage,.map-stage svg{min-height:350px;height:350px}th,td{padding:11px 10px}}
   </style>
 </head>
 <body>
-  <main class="page">
-    <section class="hero">
-      <span class="badge">研究與決策支援，不保證投資報酬</span>
-      <h1>台股晨間投資報告 2026-06-23</h1>
-      <p>報告日為 2026-06-23，本版採用最新可取得的 2026-06-22 台股收盤與法人資料，並納入 2026-06-22 美股收盤作為今日盤前國際市場參考。</p>
-      <div class="kpis">
-        <div class="kpi"><span>加權指數</span><strong>53,291.86</strong></div>
-        <div class="kpi"><span>日漲跌</span><strong class="pos">+1,375.37 / 2.65%</strong></div>
-        <div class="kpi"><span>台灣 50</span><strong>3.12%</strong></div>
-        <div class="kpi"><span>外資買超焦點</span><strong>主動統一台股增長</strong></div>
-        <div class="kpi"><span>外資賣超焦點</span><strong>群創</strong></div>
-        <div class="kpi"><span>美股關鍵</span><strong>費半 +2.04%</strong></div>
+  <header class="topbar">
+    <div class="wrap hero">
+      <div>
+        <div class="eyebrow">Professional Investor Memo</div>
+        <h1>桃園市桃園區正光路133號投資初評</h1>
+        <p class="hero-copy">本版改為中性資料備忘錄：整理標的範圍、估值口徑、3公里實價行情、人流可信度、盡調缺口與資料來源，僅供資料查核。</p>
+        <div class="hero-meta">
+          <span class="pill">報告日期：2026-06-23</span>
+          <span class="pill">標的：正光路133號門牌點位</span>
+          <span class="pill">定位：中路重劃區 / 市府生活圈外溢</span>
+          <span class="pill">用途：資料整理，非正式估價書</span>
+        </div>
       </div>
-    </section>
-
-    <section class="read-order">
-      <div><strong>1. 市場方向</strong><br>台股收盤轉強，盤前情緒偏多但非無風險。</div>
-      <div><strong>2. 籌碼壓力</strong><br>追蹤外資是否延續買超，並避開單日大量賣超股。</div>
-      <div><strong>3. ETF 策略</strong><br>00981A、00403A 均高度連動台積電與 AI 供應鏈。</div>
-    </section>
-
-    <h2>1. 今日市場結論</h2>
-    <section class="card">
-      <ul>
-        <li>加權指數 上漲 2.65%，短線氣氛偏多；但今日盤前美股科技大型股分歧，操作要等開盤量價確認。</li>
-        <li>美股 6/22 費半續創高，對台積電、AI 伺服器、PCB、散熱與電源鏈偏正向；Nasdaq 回落則提醒高估值科技股不能無差別追價。</li>
-        <li>外資買賣超需分辨 ETF 與現股：若買超集中在 ETF，代表資金偏配置；若同步買進半導體與 AI 零組件，才是主動風險承擔。</li>
-        <li>今日可觀察支撐位約 52,492.48，壓力位約 54,091.24；若開高未放量，避免追價。</li>
-        <li>盤勢預估：偏多震盪。短線只做回測承接，不做連續急漲後的高檔追單。</li>
-      </ul>
-    </section>
-
-    <h2>2. 法人買賣超前 10 名</h2>
-    <div class="grid">
-      
-    <section class="card">
-      <div class="card-head"><h3>外資買賣超</h3><span>Top 10</span></div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>排名</th><th>買超</th><th>股數</th><th>賣超</th><th>股數</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>主動統一台股增長 <span>00981A</span></td>
-              <td class="pos">84,983,498</td>
-              <td>群創 <span>3481</span></td>
-              <td class="neg">-117,423,914</td>
-            </tr>
-            
-            <tr>
-              <td>2</td>
-              <td>台玻 <span>1802</span></td>
-              <td class="pos">55,470,670</td>
-              <td>華邦電 <span>2344</span></td>
-              <td class="neg">-103,086,815</td>
-            </tr>
-            
-            <tr>
-              <td>3</td>
-              <td>中鋼 <span>2002</span></td>
-              <td class="pos">44,581,757</td>
-              <td>主動富邦台灣龍耀 <span>00405A</span></td>
-              <td class="neg">-41,538,040</td>
-            </tr>
-            
-            <tr>
-              <td>4</td>
-              <td>華新 <span>1605</span></td>
-              <td class="pos">34,774,250</td>
-              <td>主動復華未來50 <span>00991A</span></td>
-              <td class="neg">-38,895,470</td>
-            </tr>
-            
-            <tr>
-              <td>5</td>
-              <td>力積電 <span>6770</span></td>
-              <td class="pos">27,409,723</td>
-              <td>兆豐金 <span>2886</span></td>
-              <td class="neg">-37,388,242</td>
-            </tr>
-            
-            <tr>
-              <td>6</td>
-              <td>大華優利高填息30 <span>00918</span></td>
-              <td class="pos">26,262,880</td>
-              <td>主動統一升級50 <span>00403A</span></td>
-              <td class="neg">-32,675,491</td>
-            </tr>
-            
-            <tr>
-              <td>7</td>
-              <td>群益台灣精選高息 <span>00919</span></td>
-              <td class="pos">24,601,351</td>
-              <td>遠傳 <span>4904</span></td>
-              <td class="neg">-27,348,402</td>
-            </tr>
-            
-            <tr>
-              <td>8</td>
-              <td>京元電子 <span>2449</span></td>
-              <td class="pos">20,077,034</td>
-              <td>仁寶 <span>2324</span></td>
-              <td class="neg">-24,813,052</td>
-            </tr>
-            
-            <tr>
-              <td>9</td>
-              <td>主動群益科技創新 <span>00992A</span></td>
-              <td class="pos">18,843,582</td>
-              <td>台泥 <span>1101</span></td>
-              <td class="neg">-20,897,345</td>
-            </tr>
-            
-            <tr>
-              <td>10</td>
-              <td>中石化 <span>1314</span></td>
-              <td class="pos">17,463,686</td>
-              <td>華南金 <span>2880</span></td>
-              <td class="neg">-18,882,094</td>
-            </tr>
-            </tbody>
-        </table>
+      <div class="hero-card">
+        <img src="https://img.ltn.com.tw/Upload/house/page/2022/07/14/220714-14377-1-Wx3Qv.jpg" alt="桃園中路重劃區公園與住宅示意照片">
+        <div class="caption">圖片來源：自由時報地產天下。用途：呈現中路重劃區「公園綠帶＋新住宅供給」的區域型態。</div>
       </div>
-    </section>
-    
-      
-    <section class="card">
-      <div class="card-head"><h3>投信買賣超</h3><span>Top 10</span></div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>排名</th><th>買超</th><th>股數</th><th>賣超</th><th>股數</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>華邦電 <span>2344</span></td>
-              <td class="pos">47,711,359</td>
-              <td>元大金 <span>2885</span></td>
-              <td class="neg">-12,473,047</td>
-            </tr>
-            
-            <tr>
-              <td>2</td>
-              <td>兆豐金 <span>2886</span></td>
-              <td class="pos">37,260,286</td>
-              <td>日月光投控 <span>3711</span></td>
-              <td class="neg">-6,790,000</td>
-            </tr>
-            
-            <tr>
-              <td>3</td>
-              <td>遠傳 <span>4904</span></td>
-              <td class="pos">24,929,199</td>
-              <td>亞泥 <span>1102</span></td>
-              <td class="neg">-5,598,696</td>
-            </tr>
-            
-            <tr>
-              <td>4</td>
-              <td>永豐金 <span>2890</span></td>
-              <td class="pos">23,851,011</td>
-              <td>東和鋼鐵 <span>2006</span></td>
-              <td class="neg">-5,574,950</td>
-            </tr>
-            
-            <tr>
-              <td>5</td>
-              <td>第一金 <span>2892</span></td>
-              <td class="pos">18,097,629</td>
-              <td>台新新光金 <span>2887</span></td>
-              <td class="neg">-5,562,676</td>
-            </tr>
-            
-            <tr>
-              <td>6</td>
-              <td>華南金 <span>2880</span></td>
-              <td class="pos">16,158,031</td>
-              <td>晶技 <span>3042</span></td>
-              <td class="neg">-5,514,000</td>
-            </tr>
-            
-            <tr>
-              <td>7</td>
-              <td>群創 <span>3481</span></td>
-              <td class="pos">15,589,130</td>
-              <td>中信金 <span>2891</span></td>
-              <td class="neg">-5,209,267</td>
-            </tr>
-            
-            <tr>
-              <td>8</td>
-              <td>遠東新 <span>1402</span></td>
-              <td class="pos">12,928,622</td>
-              <td>東陽 <span>1319</span></td>
-              <td class="neg">-4,680,765</td>
-            </tr>
-            
-            <tr>
-              <td>9</td>
-              <td>遠東銀 <span>2845</span></td>
-              <td class="pos">12,085,064</td>
-              <td>群益證 <span>6005</span></td>
-              <td class="neg">-4,293,217</td>
-            </tr>
-            
-            <tr>
-              <td>10</td>
-              <td>玉山金 <span>2884</span></td>
-              <td class="pos">12,074,448</td>
-              <td>光寶科 <span>2301</span></td>
-              <td class="neg">-4,098,000</td>
-            </tr>
-            </tbody>
-        </table>
-      </div>
-    </section>
-    
-      
-    <section class="card">
-      <div class="card-head"><h3>自營商買賣超</h3><span>Top 10</span></div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>排名</th><th>買超</th><th>股數</th><th>賣超</th><th>股數</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>主動統一台股增長 <span>00981A</span></td>
-              <td class="pos">52,007,599</td>
-              <td>元大台灣50反1 <span>00632R</span></td>
-              <td class="neg">-79,141,271</td>
-            </tr>
-            
-            <tr>
-              <td>2</td>
-              <td>大華優利高填息30 <span>00918</span></td>
-              <td class="pos">40,346,384</td>
-              <td>主動復華未來50 <span>00991A</span></td>
-              <td class="neg">-54,940,073</td>
-            </tr>
-            
-            <tr>
-              <td>3</td>
-              <td>元大台灣50正2 <span>00631L</span></td>
-              <td class="pos">25,795,777</td>
-              <td>主動富邦台灣龍耀 <span>00405A</span></td>
-              <td class="neg">-45,759,847</td>
-            </tr>
-            
-            <tr>
-              <td>4</td>
-              <td>主動安聯美國科技 <span>00402A</span></td>
-              <td class="pos">21,275,449</td>
-              <td>主動國泰動能高息 <span>00400A</span></td>
-              <td class="neg">-25,711,438</td>
-            </tr>
-            
-            <tr>
-              <td>5</td>
-              <td>元大納斯達克精選 <span>009820</span></td>
-              <td class="pos">20,280,415</td>
-              <td>野村稀土關鍵資源 <span>009821</span></td>
-              <td class="neg">-16,589,000</td>
-            </tr>
-            
-            <tr>
-              <td>6</td>
-              <td>主動野村臺灣高息 <span>00999A</span></td>
-              <td class="pos">19,979,633</td>
-              <td>主動統一全球創新 <span>00988A</span></td>
-              <td class="neg">-15,639,275</td>
-            </tr>
-            
-            <tr>
-              <td>7</td>
-              <td>元大美債20正2 <span>00680L</span></td>
-              <td class="pos">16,949,254</td>
-              <td>凱基台灣TOP50 <span>009816</span></td>
-              <td class="neg">-14,010,956</td>
-            </tr>
-            
-            <tr>
-              <td>8</td>
-              <td>元大滬深300正2 <span>00637L</span></td>
-              <td class="pos">14,686,514</td>
-              <td>復華富時不動產 <span>00712</span></td>
-              <td class="neg">-12,538,356</td>
-            </tr>
-            
-            <tr>
-              <td>9</td>
-              <td>主動群益科技創新 <span>00992A</span></td>
-              <td class="pos">14,559,113</td>
-              <td>主動聯博全球非投 <span>00984D</span></td>
-              <td class="neg">-9,733,000</td>
-            </tr>
-            
-            <tr>
-              <td>10</td>
-              <td>國泰20年美債正2 <span>00688L</span></td>
-              <td class="pos">12,980,148</td>
-              <td>主動統一升級50 <span>00403A</span></td>
-              <td class="neg">-8,815,714</td>
-            </tr>
-            </tbody>
-        </table>
-      </div>
-    </section>
-    
-      
-    <section class="card">
-      <div class="card-head"><h3>三大法人合計買賣超</h3><span>Top 10</span></div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>排名</th><th>買超</th><th>股數</th><th>賣超</th><th>股數</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>主動統一台股增長 <span>00981A</span></td>
-              <td class="pos">137,172,097</td>
-              <td>群創 <span>3481</span></td>
-              <td class="neg">-102,511,541</td>
-            </tr>
-            
-            <tr>
-              <td>2</td>
-              <td>大華優利高填息30 <span>00918</span></td>
-              <td class="pos">66,609,264</td>
-              <td>主動復華未來50 <span>00991A</span></td>
-              <td class="neg">-93,585,543</td>
-            </tr>
-            
-            <tr>
-              <td>3</td>
-              <td>台玻 <span>1802</span></td>
-              <td class="pos">59,416,344</td>
-              <td>主動富邦台灣龍耀 <span>00405A</span></td>
-              <td class="neg">-87,297,887</td>
-            </tr>
-            
-            <tr>
-              <td>4</td>
-              <td>中鋼 <span>2002</span></td>
-              <td class="pos">45,254,334</td>
-              <td>元大台灣50反1 <span>00632R</span></td>
-              <td class="neg">-77,555,271</td>
-            </tr>
-            
-            <tr>
-              <td>5</td>
-              <td>元大台灣50正2 <span>00631L</span></td>
-              <td class="pos">37,996,909</td>
-              <td>華邦電 <span>2344</span></td>
-              <td class="neg">-55,574,118</td>
-            </tr>
-            
-            <tr>
-              <td>6</td>
-              <td>華新 <span>1605</span></td>
-              <td class="pos">36,651,772</td>
-              <td>主動統一升級50 <span>00403A</span></td>
-              <td class="neg">-41,291,205</td>
-            </tr>
-            
-            <tr>
-              <td>7</td>
-              <td>主動群益科技創新 <span>00992A</span></td>
-              <td class="pos">33,399,695</td>
-              <td>主動國泰動能高息 <span>00400A</span></td>
-              <td class="neg">-38,131,384</td>
-            </tr>
-            
-            <tr>
-              <td>8</td>
-              <td>群益台灣精選高息 <span>00919</span></td>
-              <td class="pos">31,773,479</td>
-              <td>主動統一全球創新 <span>00988A</span></td>
-              <td class="neg">-34,041,024</td>
-            </tr>
-            
-            <tr>
-              <td>9</td>
-              <td>力積電 <span>6770</span></td>
-              <td class="pos">28,712,988</td>
-              <td>仁寶 <span>2324</span></td>
-              <td class="neg">-26,883,920</td>
-            </tr>
-            
-            <tr>
-              <td>10</td>
-              <td>主動野村臺灣高息 <span>00999A</span></td>
-              <td class="pos">28,156,533</td>
-              <td>台泥 <span>1101</span></td>
-              <td class="neg">-20,867,260</td>
-            </tr>
-            </tbody>
-        </table>
-      </div>
-    </section>
-    
     </div>
+  </header>
 
-    <h2>3. 大盤與國際市場影響</h2>
-    <div class="grid">
-      <section class="card">
-        <div class="card-head"><h3>市場指數與技術判讀</h3><span>TWSE 2026-06-22</span></div>
-        <ul>
-          <li>加權指數趨勢：53,291.86，上漲 +1,375.37 點，短線偏多。</li>
-          <li>OTC 趨勢：本次 TWSE API 未提供 OTC 即時欄位，需以櫃買中心最新資料交叉確認。</li>
-          <li>台積電對大盤影響：台積電同時是 00981A、00403A 最大權重股，且費半續創高，對台股權值與 ETF 淨值均為關鍵。</li>
-          <li>外資期貨未平倉方向：本次未取得 TAIFEX 未平倉資料，列為待確認；現貨外資流向先作為替代觀察。</li>
-          <li>台幣匯率影響：資料不足；若台幣走強，有利外資回補權值股，若快速貶值則壓抑估值。</li>
-          <li>市場情緒：偏多震盪。支撐 52,492.48，壓力 54,091.24。</li>
-        </ul>
-      </section>
-      <section class="card">
-        <div class="card-head"><h3>國際市場直接影響</h3><span>2026-06-22</span></div>
-        <div class="alert good">美股 6/22 漲跌互見：Nasdaq -1.32%、S&P 500 -0.37%，但費半 +2.04%續創高；對台股是「權值半導體偏正向、科技大型股情緒偏分歧」的組合。</div>
-        <ul><li>美股四大指數：S&P 500 收 7,472.79（-0.37%）、Nasdaq 收 26,166.60（-1.32%）、Dow 收 51,712.71（+0.29%）、Russell 2000 收 3,004.40（+0.8%）。</li><li>費半指數：SOX 收 14,634.72（+2.04%）並再創新高，直接支撐台股半導體、AI 伺服器、PCB、散熱與高階零組件。</li><li>美債殖利率：10 年期約 4.49%-4.51%，短端殖利率升至高檔，代表 Fed 偏鷹預期仍壓抑高本益比科技股估值。</li><li>原油與黃金：美伊談判降溫使油價回落，WTI 約 73.86 美元、Brent 約 77.52 美元；油價回落有助通膨預期，但債券殖利率未同步下降。</li><li>VIX：6/22 收 17.28，較前一交易日上升，顯示市場對科技股與利率變數仍有避險需求。</li><li>AI 與大型科技：費半續強但 Alphabet、Amazon、Broadcom 等大型科技轉弱，台股今日應偏向篩選半導體強勢鏈，不宜把所有科技股視為同步轉強。</li><li>Fed 政策：市場重新定價升息風險，若本週 PCE 或 Fed 官員談話偏鷹，AI 與高估值權值股容易出現獲利了結。</li></ul>
-      </section>
-    </div>
-
-    <h2>4. 強勢族群</h2>
-    <section class="card">
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>族群</th><th>漲跌幅</th><th>為何強勢</th><th>資金流入原因</th><th>延續性</th><th>代表股</th></tr></thead>
-          <tbody><tr><td>臺灣科技龍頭通訊指數</td><td class='pos'>2.99%</td><td>漲幅領先大盤，顯示資金聚焦度提高。</td><td>若同步出現在外資或投信買超排行，延續性較高；若僅指數反彈，隔日需看量能確認。</td><td>偏正向，但不宜追高，等待回測不破短均線。</td><td>以法人買超排行與量能突破股為主</td></tr><tr><td>臺灣全市場指數</td><td class='pos'>2.46%</td><td>漲幅領先大盤，顯示資金聚焦度提高。</td><td>若同步出現在外資或投信買超排行，延續性較高；若僅指數反彈，隔日需看量能確認。</td><td>偏正向，但不宜追高，等待回測不破短均線。</td><td>以法人買超排行與量能突破股為主</td></tr><tr><td>臺灣生技指數</td><td class='pos'>2.29%</td><td>漲幅領先大盤，顯示資金聚焦度提高。</td><td>若同步出現在外資或投信買超排行，延續性較高；若僅指數反彈，隔日需看量能確認。</td><td>偏正向，但不宜追高，等待回測不破短均線。</td><td>以法人買超排行與量能突破股為主</td></tr><tr><td>臺灣企業社會責任中小型指數</td><td class='pos'>2.06%</td><td>漲幅領先大盤，顯示資金聚焦度提高。</td><td>若同步出現在外資或投信買超排行，延續性較高；若僅指數反彈，隔日需看量能確認。</td><td>偏正向，但不宜追高，等待回測不破短均線。</td><td>以法人買超排行與量能突破股為主</td></tr><tr><td>臺灣IPO指數</td><td class='pos'>1.09%</td><td>漲幅領先大盤，顯示資金聚焦度提高。</td><td>若同步出現在外資或投信買超排行，延續性較高；若僅指數反彈，隔日需看量能確認。</td><td>偏正向，但不宜追高，等待回測不破短均線。</td><td>以法人買超排行與量能突破股為主</td></tr></tbody>
-        </table>
+  <main class="wrap">
+    <section>
+      <div class="grid kpis">
+        <article class="card pad kpi"><div><div class="label">資料狀態</div><div class="value">初步整理</div></div><p class="sub">目前僅能作為區域與行情參考；尚未取得 133 號本體與產權資料。</p></article>
+        <article class="card pad kpi"><div><div class="label">單一標的完整度</div><div class="value">35-45%</div></div><p class="sub">缺建物型態、坪數、謄本、地號、分區、租金、人流與現場條件。</p></article>
+        <article class="card pad kpi"><div><div class="label">3公里行情帶</div><div class="value">18-58萬/坪</div></div><p class="sub">差距來自新案、屋齡、臨路、產品型態不同，不能用單一均價套用。</p></article>
+        <article class="card pad kpi"><div><div class="label">估值前提</div><div class="value">型態先決</div></div><p class="sub">住宅、公寓、透天、店面、土地的估價模型完全不同。</p></article>
       </div>
     </section>
 
-    <h2>5. ETF 00981A / 00403A 每日成分股報告</h2>
-    <section class="card">
-      <div class="card-head"><h3>00981A 主動統一台股增長</h3><span>更新 2026/06/22</span></div>
-      <div class="alert">市價 32.23，漲跌 + 0.73（2.32%）；NAV 32.29，折溢價 -0.19%。前十大集中度約 62.00% 。</div>
-      <div class="table-wrap"><table><thead><tr><th>ETF</th><th>成分股</th><th>權重</th><th>族群</th><th>今日表現</th><th>籌碼/量能</th><th>解讀</th></tr></thead><tbody>
-            <tr>
-              <td>00981A</td>
-              <td>台積電 2330</td>
-              <td>10.00%</td>
-              <td>半導體 / AI 核心</td>
-              <td>2,510.00 / +100.00</td>
-              <td>持股 11,960,000</td>
-              <td>權重高，主導 ETF 淨值波動</td>
-            </tr>
-            
-            <tr>
-              <td>00981A</td>
-              <td>台光電 2383</td>
-              <td>8.71%</td>
-              <td>PCB / 高速傳輸</td>
-              <td>5,825.00 / +225.00</td>
-              <td>持股 4,486,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00981A</td>
-              <td>國巨* 2327</td>
-              <td>8.48%</td>
-              <td>被動元件 / AI 電源</td>
-              <td>1,065.00 / -15.00</td>
-              <td>持股 23,892,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00981A</td>
-              <td>聯發科 2454</td>
-              <td>7.23%</td>
-              <td>IC 設計</td>
-              <td>4,465.00 / +75.00</td>
-              <td>持股 4,861,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00981A</td>
-              <td>智邦 2345</td>
-              <td>5.48%</td>
-              <td>籌碼強勢股</td>
-              <td>2,595.00 / +160.00</td>
-              <td>持股 6,334,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00981A</td>
-              <td>旺矽 6223</td>
-              <td>4.88%</td>
-              <td>籌碼強勢股</td>
-              <td>資料不足 / 資料不足</td>
-              <td>持股 2,279,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00981A</td>
-              <td>台達電 2308</td>
-              <td>4.46%</td>
-              <td>電子 / AI 供應鏈</td>
-              <td>2,150.00 / 0.00</td>
-              <td>持股 6,222,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00981A</td>
-              <td>欣興 3037</td>
-              <td>4.46%</td>
-              <td>籌碼強勢股</td>
-              <td>1,005.00 / +37.00</td>
-              <td>持股 13,307,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00981A</td>
-              <td>奇鋐 3017</td>
-              <td>4.18%</td>
-              <td>散熱</td>
-              <td>2,420.00 / +20.00</td>
-              <td>持股 5,191,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00981A</td>
-              <td>聯電 2303</td>
-              <td>4.12%</td>
-              <td>晶圓代工</td>
-              <td>160.00 / +14.50</td>
-              <td>持股 77,390,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            </tbody></table></div>
+    <section>
+      <div class="section-head"><h2>資料摘要</h2><p class="section-note">以下僅整理目前可觀察事實與限制，不應作為買入、出售、出價或持有依據。</p></div>
+      <div class="grid two">
+        <article class="card pad decision">
+          <h3 class="asset-title"><span class="dot wine"></span>目前可確認</h3>
+          <p>正光路 133 號位於中路重劃區生活圈與市府生活圈外溢區，具正光路門牌辨識度，3 公里內可觀察新案、中古大樓與老公寓等不同價格層級。但目前尚未取得標的本體資料，因此不能形成單一估值。</p>
+        </article>
+        <article class="card pad">
+          <h3 class="asset-title"><span class="dot"></span>估值分歧來源</h3>
+          <p>若為住宅或老公寓，估值會接近同屋齡住宅樣本；若為直接臨路店面，估值需納入租金收益與門口人流；若為土地或整棟，估值取決於基地、臨路、容積與整合可能性。</p>
+        </article>
+      </div>
     </section>
-    <section class="card">
-      <div class="card-head"><h3>00403A 主動統一升級50</h3><span>更新 2026/06/22</span></div>
-      <div class="alert">市價 11.38，漲跌 + 0.35（3.17%）；NAV 11.36，折溢價 0.18%。前十大集中度約 59.50% 。</div>
-      <div class="table-wrap"><table><thead><tr><th>ETF</th><th>成分股</th><th>權重</th><th>族群</th><th>今日表現</th><th>籌碼/量能</th><th>解讀</th></tr></thead><tbody>
-            <tr>
-              <td>00403A</td>
-              <td>台積電 2330</td>
-              <td>18.14%</td>
-              <td>半導體 / AI 核心</td>
-              <td>2,510.00 / +100.00</td>
-              <td>持股 12,900,000</td>
-              <td>權重高，主導 ETF 淨值波動</td>
-            </tr>
-            
-            <tr>
-              <td>00403A</td>
-              <td>聯電 2303</td>
-              <td>6.49%</td>
-              <td>晶圓代工</td>
-              <td>160.00 / +14.50</td>
-              <td>持股 72,400,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00403A</td>
-              <td>國巨* 2327</td>
-              <td>5.99%</td>
-              <td>被動元件 / AI 電源</td>
-              <td>1,065.00 / -15.00</td>
-              <td>持股 10,050,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00403A</td>
-              <td>欣興 3037</td>
-              <td>5.04%</td>
-              <td>籌碼強勢股</td>
-              <td>1,005.00 / +37.00</td>
-              <td>持股 8,960,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00403A</td>
-              <td>華邦電 2344</td>
-              <td>4.82%</td>
-              <td>電子 / AI 供應鏈</td>
-              <td>222.00 / +3.50</td>
-              <td>持股 38,800,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00403A</td>
-              <td>奇鋐 3017</td>
-              <td>4.41%</td>
-              <td>散熱</td>
-              <td>2,420.00 / +20.00</td>
-              <td>持股 3,250,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00403A</td>
-              <td>台光電 2383</td>
-              <td>4.40%</td>
-              <td>PCB / 高速傳輸</td>
-              <td>5,825.00 / +225.00</td>
-              <td>持股 1,350,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00403A</td>
-              <td>金像電 2368</td>
-              <td>3.67%</td>
-              <td>電子 / AI 供應鏈</td>
-              <td>1,395.00 / +40.00</td>
-              <td>持股 4,700,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00403A</td>
-              <td>聯發科 2454</td>
-              <td>3.30%</td>
-              <td>IC 設計</td>
-              <td>4,465.00 / +75.00</td>
-              <td>持股 1,320,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            
-            <tr>
-              <td>00403A</td>
-              <td>旺矽 6223</td>
-              <td>3.24%</td>
-              <td>籌碼強勢股</td>
-              <td>資料不足 / 資料不足</td>
-              <td>持股 900,000</td>
-              <td>觀察是否與法人買超同步</td>
-            </tr>
-            </tbody></table></div>
+
+    <section>
+      <div class="section-head"><h2>門牌與區位判讀</h2><p class="section-note">正光路 133 號屬桃園區中正里 21 鄰，郵遞區號帶為 330060，靠近正光路 143 巷與文中路 47 巷住宅聚落。</p></div>
+      <div class="grid two">
+        <article class="card pad">
+          <h3 class="asset-title"><span class="dot"></span>支撐因素</h3>
+          <p>中路重劃區的新社區、公園綠帶、整齊街廓與正光路幹道辨識度，提供區域行情支撐。3 公里內可觀察到新案與中古大樓價格落差，代表市場已有清楚的產品分層。</p>
+          <div class="score"><span class="label">住宅保值</span><div class="bar"><div class="fill" style="width:78%"></div></div></div>
+          <div class="score"><span class="label">生活機能</span><div class="bar"><div class="fill sage" style="width:76%"></div></div></div>
+          <div class="score"><span class="label">商業密度</span><div class="bar"><div class="fill ochre" style="width:55%"></div></div></div>
+        </article>
+        <article class="card pad">
+          <h3 class="asset-title"><span class="dot wine"></span>限制因素</h3>
+          <p>此點位不是桃園站前或藝文核心商圈，生活型人流不等於消費型人流。店面投資需要現場門面與人流驗證；住宅投資則需拆分老屋、新大樓、臨路與巷內條件。</p>
+          <div class="score"><span class="label">人流可信度</span><div class="bar"><div class="fill wine" style="width:40%"></div></div></div>
+          <div class="score"><span class="label">估值可用度</span><div class="bar"><div class="fill ochre" style="width:55%"></div></div></div>
+          <div class="score"><span class="label">盡調缺口</span><div class="bar"><div class="fill wine" style="width:72%"></div></div></div>
+        </article>
+      </div>
     </section>
-    <section class="card">
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>ETF</th><th>今日觀察</th><th>適合情境</th><th>風險</th><th>操作建議</th></tr></thead>
+
+    <section>
+      <div class="section-head"><h2>3公里實價行情與估值口徑</h2><p class="section-note">此表是投資初評行情帶，不是 133 號估價。正式估價需改用同型態、同屋齡、同臨路條件樣本。</p></div>
+      <div class="card table-wrap">
+        <table class="matrix">
+          <thead><tr><th>樣本/區位</th><th>產品定位</th><th>公開行情/成交</th><th>對133號的用途</th><th>注意事項</th></tr></thead>
           <tbody>
-            <tr><td>00981A</td><td>主動成長配置，台積電與 AI 供應鏈權重高。</td><td>偏多盤、科技股輪動盤。</td><td>成分集中，若費半回落或台積電開高走低，淨值波動放大。</td><td>已有持倉續抱；新資金分批，不追單日長紅。</td></tr>
-            <tr><td>00403A</td><td>升級 50 型配置，台積電權重更高。</td><td>想用 ETF 參與大型權值股反彈。</td><td>對台積電與大型電子股依賴較高，分散度低於廣泛型 ETF。</td><td>適合核心衛星中的成長衛星部位，跌回短均附近再加碼。</td></tr>
+            <tr><td><strong>正光路路段</strong></td><td>大樓/華廈為主</td><td>近 3 個月公開行情約 54.3 萬/坪</td><td><span class="tag">路段上緣參考</span></td><td>若 133 號為老屋或透天，不可直接套用。</td></tr>
+            <tr><td><strong>京懋泰閤</strong></td><td>正光路與力行路口，新案/預售</td><td>約 45.0-58.0 萬/坪；近一年約 54.5 萬/坪</td><td><span class="tag">新案比較</span></td><td>可反映中路新案天花板，不代表老屋價值。</td></tr>
+            <tr><td><strong>京懋一號</strong></td><td>正光路300號，約 6-7 年大樓</td><td>公開來源約 47.5-54.9 萬/坪</td><td><span class="tag">中古大樓比較</span></td><td>較適合作為中路成熟大樓參考。</td></tr>
+            <tr><td><strong>市府采舍</strong></td><td>正光路86巷15號，約 7 年大樓</td><td>公開來源約 36.4-45.3 萬/坪；另有近 2 年約 39 萬/坪資料</td><td><span class="tag warn">中路中古比較</span></td><td>巷弄與產品條件需折價或調整。</td></tr>
+            <tr><td><strong>正光二街</strong></td><td>同生活圈住宅樣本</td><td>115/04 成交樣本約 50 萬/坪</td><td><span class="tag warn">同圈參考</span></td><td>需拆車位、樓層與建物型態。</td></tr>
+            <tr><td><strong>正光路143巷22之3號</strong></td><td>43年公寓，16.65坪</td><td>112/01/19，約 21.9 萬/坪，總價 365 萬</td><td><span class="tag risk">老公寓低檔</span></td><td>若 133 號為老屋，此類樣本比新案更重要。</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <h2>6. 潛力個股 / 追蹤清單</h2>
-    <section class="card">
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>股票</th><th>類型</th><th>邏輯</th><th>進場區</th><th>停損</th><th>目標價</th><th>風險</th></tr></thead>
-          <tbody>
-        <tr>
-          <td>台玻 1802</td><td>短線 / 籌碼強勢股</td><td>法人合計買超 59,416,344 股，外資 55,470,670 股；若量能延續，可作為資金輪動觀察標的。<br>收盤 76.60，日內區間 73.40-78.40；以不跌破前低作為續強判斷。</td>
-          <td>75.07-77.37</td><td>72.77</td><td>81.20-84.26</td><td>若法人隔日轉賣或跌破 5 日線，應降槓桿並停止追價。</td>
-        </tr>
-        
-        <tr>
-          <td>中鋼 2002</td><td>短線 / 籌碼強勢股</td><td>法人合計買超 45,254,334 股，外資 44,581,757 股；若量能延續，可作為資金輪動觀察標的。<br>收盤 19.50，日內區間 19.15-19.90；以不跌破前低作為續強判斷。</td>
-          <td>19.11-19.70</td><td>18.52</td><td>20.67-21.45</td><td>若法人隔日轉賣或跌破 5 日線，應降槓桿並停止追價。</td>
-        </tr>
-        
-        <tr>
-          <td>華新 1605</td><td>短線 / 籌碼強勢股</td><td>法人合計買超 36,651,772 股，外資 34,774,250 股；若量能延續，可作為資金輪動觀察標的。<br>收盤 40.75，日內區間 40.05-42.25；以不跌破前低作為續強判斷。</td>
-          <td>39.94-41.16</td><td>38.71</td><td>43.20-44.83</td><td>若法人隔日轉賣或跌破 5 日線，應降槓桿並停止追價。</td>
-        </tr>
-        
-        <tr>
-          <td>力積電 6770</td><td>短線 / 電子 / AI 供應鏈</td><td>法人合計買超 28,712,988 股，外資 27,409,723 股；若量能延續，可作為資金輪動觀察標的。<br>收盤 81.60，日內區間 78.50-81.60；以不跌破前低作為續強判斷。</td>
-          <td>79.97-82.42</td><td>77.52</td><td>86.50-89.76</td><td>若法人隔日轉賣或跌破 5 日線，應降槓桿並停止追價。</td>
-        </tr>
-        
-        <tr>
-          <td>永豐金 2890</td><td>中線 / 金融</td><td>法人合計買超 22,461,516 股，外資 -1,129,752 股；若量能延續，可作為資金輪動觀察標的。<br>收盤 39.80，日內區間 39.60-40.75；以不跌破前低作為續強判斷。</td>
-          <td>39.00-40.20</td><td>37.81</td><td>42.19-43.78</td><td>若法人隔日轉賣或跌破 5 日線，應降槓桿並停止追價。</td>
-        </tr>
-        
-        <tr>
-          <td>中石化 1314</td><td>中線 / 籌碼強勢股</td><td>法人合計買超 17,525,281 股，外資 17,463,686 股；若量能延續，可作為資金輪動觀察標的。<br>收盤 8.04，日內區間 7.80-8.24；以不跌破前低作為續強判斷。</td>
-          <td>7.88-8.12</td><td>7.64</td><td>8.52-8.84</td><td>若法人隔日轉賣或跌破 5 日線，應降槓桿並停止追價。</td>
-        </tr>
-        
-        <tr>
-          <td>台塑 1301</td><td>中線 / 籌碼強勢股</td><td>法人合計買超 17,328,363 股，外資 16,495,001 股；若量能延續，可作為資金輪動觀察標的。<br>收盤 52.40，日內區間 51.70-53.50；以不跌破前低作為續強判斷。</td>
-          <td>51.35-52.92</td><td>49.78</td><td>55.54-57.64</td><td>若法人隔日轉賣或跌破 5 日線，應降槓桿並停止追價。</td>
-        </tr>
-        
-        <tr>
-          <td>京元電子 2449</td><td>中線 / 電子 / AI 供應鏈</td><td>法人合計買超 16,669,659 股，外資 20,077,034 股；若量能延續，可作為資金輪動觀察標的。<br>收盤 339.00，日內區間 314.00-339.00；以不跌破前低作為續強判斷。</td>
-          <td>332.22-342.39</td><td>322.05</td><td>359.34-372.90</td><td>若法人隔日轉賣或跌破 5 日線，應降槓桿並停止追價。</td>
-        </tr>
-        </tbody>
-        </table>
+    <section>
+      <div class="section-head"><h2>標的型態推演</h2><p class="section-note">在未確認本體前，投資模型先分三條路徑。</p></div>
+      <div class="grid three">
+        <article class="card pad"><h3 class="asset-title"><span class="dot"></span>住宅/公寓</h3><p>用老公寓或中古住宅成交樣本估值，重點查屋齡、樓層、權狀坪數、是否有電梯、修繕成本與租金。</p><p class="sub"><span class="tag">保守可追</span> 適合先算自用/出租雙情境。</p></article>
+        <article class="card pad"><h3 class="asset-title"><span class="dot ochre"></span>店面商用</h3><p>不可只看正光路路段均價。需查門面寬度、招牌可視、停靠、路口距離、租金行情與實際人流。</p><p class="sub"><span class="tag warn">需現場驗證</span> 人流與租金決定價格。</p></article>
+        <article class="card pad"><h3 class="asset-title"><span class="dot wine"></span>土地/整棟</h3><p>價值取決於地號、基地面積、臨路寬度、使用分區、建蔽容積、道路持分與鄰地整合可行性。</p><p class="sub"><span class="tag risk">高門檻</span> 必須查謄本與分區。</p></article>
       </div>
     </section>
 
-    <h2>7. ETF 配置與今日交易策略</h2>
-    <div class="grid">
-      <section class="card">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>ETF</th><th>類型</th><th>建議原因</th><th>配置建議</th></tr></thead>
-            <tbody>
-              <tr><td>00981A</td><td>成長型 / AI 相關</td><td>主動式成長，受 AI 與半導體資金偏好支撐。</td><td>積極型 15%-20%，穩健型 8%-12%。</td></tr>
-              <tr><td>00403A</td><td>大型權值 / AI 相關</td><td>台積電權重高，適合權值反彈情境。</td><td>積極型 10%-15%，穩健型 5%-10%。</td></tr>
-              <tr><td>0050 / 市值型</td><td>防禦核心</td><td>降低單一主題集中度。</td><td>保守型 20%-35%。</td></tr>
-              <tr><td>高股息 ETF</td><td>高股息 / 防禦</td><td>市場高檔震盪時提供現金流與波動緩衝。</td><td>保守型 20%-30%，不追溢價。</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-      <section class="card">
-        <ul>
-          <li>保守型策略：股票與成長 ETF 合計 40%-50%，現金 50%-60%；關注 0050、高股息 ETF、台積電回測承接。</li>
-          <li>穩健型策略：股票與 ETF 合計 55%-65%，以 00981A / 00403A 分批配置，搭配半導體與散熱龍頭。</li>
-          <li>積極型策略：70% 以內，聚焦法人買超且放量突破股；若開高走低，當日不加碼。</li>
-          <li>適合操作週期：短線 1-5 日只看量價與法人延續；中線 2-6 週看 AI 資本支出與費半趨勢。</li>
-        </ul>
-      </section>
-    </div>
-
-    <h2>8. 今日風險提醒</h2>
-    <section class="card">
-      <div class="alert risk">最大風險：台股前一日強漲後，今日若開高但量能無法延續，容易出現獲利了結；同時美股科技大型股轉弱，可能壓抑追價意願。</div>
-      <ul>
-        <li>可能利空：Fed 偏鷹談話、美元或美債殖利率再度上行、AI 股估值過熱後回檔。</li>
-        <li>市場過熱訊號：成交量放大但指數開高走低、外資現貨轉賣、ETF 折溢價快速擴大。</li>
-        <li>不建議追價族群：單日急漲且無法人延續買超的小型題材股、短線漲幅遠高於基本面更新的 AI 零組件。</li>
-        <li>拉回原因：台積電與費半若無法延續，台股權值與 00981A / 00403A 將同步受壓。</li>
-      </ul>
+    <section>
+      <div class="section-head"><h2>人流資料可信度</h2><p class="section-note">目前沒有 133 號門口實測人流、電信信令或 Google 熱門時段資料；下圖只能作為公開資料推估，不可作為準確人流數據。</p></div>
+      <div class="grid wide">
+        <article class="card">
+          <div class="map-toolbar">
+            <button class="map-btn active" data-layer="public">公開資料推估</button>
+            <button class="map-btn" data-layer="retail">商用選址口徑</button>
+            <button class="map-btn" data-layer="commute">通勤生活口徑</button>
+          </div>
+          <div class="map-stage">
+            <svg viewBox="0 0 900 500" role="img" aria-label="正光路133號周邊人流推估示意圖">
+              <defs><filter id="blur"><feGaussianBlur stdDeviation="18"></feGaussianBlur></filter><linearGradient id="road" x1="0" x2="1"><stop offset="0" stop-color="#cfc5b4"/><stop offset="1" stop-color="#b7ad9c"/></linearGradient></defs>
+              <rect width="900" height="500" fill="#f7f1e7"></rect>
+              <path d="M60 340 C220 300 330 285 480 270 C620 258 730 235 850 202" stroke="url(#road)" stroke-width="34" fill="none" stroke-linecap="round"></path>
+              <path d="M120 118 C250 158 390 188 520 238 C640 288 735 318 845 374" stroke="#d5ccbc" stroke-width="24" fill="none" stroke-linecap="round"></path>
+              <path d="M498 20 C506 132 508 250 490 478" stroke="#b9afa0" stroke-width="44" fill="none" stroke-linecap="round"></path>
+              <path d="M230 35 C258 145 285 278 310 460" stroke="#d6cbbb" stroke-width="18" fill="none" stroke-linecap="round"></path>
+              <rect x="72" y="82" width="190" height="76" rx="12" fill="#dce9e5" stroke="#b7cfc9"></rect><text x="92" y="126" font-size="19" font-weight="700" fill="#236b68">市府/司法園區</text>
+              <rect x="80" y="372" width="215" height="82" rx="22" fill="#d7e3d0" stroke="#b8c7af"></rect><text x="116" y="420" font-size="20" font-weight="700" fill="#55704d">向陽/風禾公園</text>
+              <rect x="618" y="73" width="190" height="74" rx="12" fill="#eadadb" stroke="#d4b8ba"></rect><text x="650" y="118" font-size="19" font-weight="700" fill="#8b3f42">藝文特區方向</text>
+              <rect x="585" y="350" width="220" height="78" rx="12" fill="#f0e3c9" stroke="#d8c397"></rect><text x="616" y="397" font-size="18" font-weight="700" fill="#8a651b">文中路住宅聚落</text>
+              <g class="heat active" data-heat="public" filter="url(#blur)"><circle cx="485" cy="270" r="112" fill="rgba(139,63,66,.58)"></circle><circle cx="318" cy="316" r="96" fill="rgba(185,133,46,.52)"></circle><circle cx="210" cy="210" r="76" fill="rgba(185,133,46,.48)"></circle><circle cx="702" cy="118" r="86" fill="rgba(109,128,102,.45)"></circle></g>
+              <g class="heat" data-heat="retail" filter="url(#blur)"><circle cx="495" cy="270" r="132" fill="rgba(139,63,66,.62)"></circle><circle cx="620" cy="246" r="90" fill="rgba(185,133,46,.55)"></circle><circle cx="310" cy="316" r="78" fill="rgba(185,133,46,.48)"></circle></g>
+              <g class="heat" data-heat="commute" filter="url(#blur)"><circle cx="705" cy="116" r="120" fill="rgba(139,63,66,.58)"></circle><circle cx="498" cy="240" r="108" fill="rgba(185,133,46,.54)"></circle><circle cx="185" cy="410" r="92" fill="rgba(109,128,102,.48)"></circle><circle cx="318" cy="316" r="88" fill="rgba(185,133,46,.45)"></circle></g>
+              <path d="M60 340 C220 300 330 285 480 270 C620 258 730 235 850 202" stroke="#725d49" stroke-width="4" fill="none" stroke-linecap="round"></path>
+              <path d="M498 20 C506 132 508 250 490 478" stroke="#6e675f" stroke-width="5" fill="none" stroke-linecap="round"></path>
+              <text x="364" y="300" font-size="20" font-weight="800" fill="#1f252b">正光路133號核心</text>
+              <text x="514" y="190" font-size="16" fill="#555">中正路/G10-G11外溢</text>
+              <text x="246" y="230" font-size="16" fill="#555">143巷住宅帶</text>
+              <circle cx="486" cy="270" r="10" fill="#8b3f42"></circle><circle cx="314" cy="316" r="8" fill="#b9852e"></circle><circle cx="706" cy="118" r="8" fill="#236b68"></circle>
+            </svg>
+          </div>
+        </article>
+        <aside class="card"><div class="legend"><h3 class="asset-title"><span class="dot"></span>判讀限制</h3><div class="swatch"></div><p id="heatText">以 133 號為核心，公開資料推估的人流來自正光路主幹道、143 巷住宅聚落、文中路 47 巷社區，以及向陽公園/YouBike/公園活動節點。</p><div class="callout"><strong>投資人注意</strong><p>此圖不可用來推估租金。若要判斷店面價值，需補平假日早中晚人工計數、店家熱門時段或商用定位資料。</p></div></div></aside>
+      </div>
     </section>
 
-    <footer class="footer">
-      <p>固定公開網址：<a href="https://taiwan-stock-report-16l.pages.dev/">https://taiwan-stock-report-16l.pages.dev/</a></p>
-      <p>資料來源：TWSE MI_INDEX、TWSE T86、ETF 資訊網 00981A / 00403A 成分股頁；國際市場參考：</p>
-      <ul><li><a href="https://apnews.com/article/15484e7e5b168601a3f2c0061eb3ffd1">AP 6/22 美股收盤</a></li><li><a href="https://money.udn.com/money/story/123398/9582116">經濟日報 6/22 費半與科技股</a></li><li><a href="https://www.cboe.com/tradable-products/vix/">Cboe VIX</a></li><li><a href="https://www.marketwatch.com/livecoverage/stock-market-today-dow-s-p-500-investors-us-iran-peace-talks-brent-crude-declines/card/2-year-treasury-yield-climbs-to-levels-not-seen-since-early-2025-RmqjsbC1HLyOJItaIJxe">MarketWatch / Treasury yields</a></li></ul>
-      <p>本報告為研究與決策支援，不保證投資報酬；實際交易請依個人風險承受度與最新盤中資訊調整。</p>
-    </footer>
+    <section>
+      <div class="section-head"><h2>圖片與區位素材</h2><p class="section-note">圖片作為區域型態輔助，不代表 133 號現場照片。</p></div>
+      <div class="grid three">
+        <figure class="card"><img src="https://img.ltn.com.tw/Upload/house/page/2022/07/14/220714-14377-1-Wx3Qv.jpg" alt="中路重劃區公園與高樓"><figcaption>中路重劃區公園與高樓型態。來源：自由時報地產天下。</figcaption></figure>
+        <figure class="card"><img src="https://wp.housefeel.com.tw/wp-content/uploads/2023/03/FB-Share-1200x628-22.png" alt="中路重劃區買房指南封面圖"><figcaption>中路重劃區生活圈與房價議題參考圖。來源：HouseFeel 房感。</figcaption></figure>
+        <figure class="card"><div class="visual"><svg class="mini-map" viewBox="0 0 340 230"><rect width="340" height="230" rx="12" fill="#fffdf8"></rect><path d="M30 160 C95 132 155 123 215 104 C260 90 295 78 320 62" stroke="#b9852e" stroke-width="17" fill="none" stroke-linecap="round"></path><path d="M190 22 C197 82 199 145 187 211" stroke="#236b68" stroke-width="18" fill="none" stroke-linecap="round"></path><rect x="22" y="30" width="94" height="45" rx="8" fill="#dce9e5"></rect><text x="40" y="58" font-size="13" fill="#236b68" font-weight="700">市府/司法</text><rect x="34" y="178" width="102" height="36" rx="8" fill="#d7e3d0"></rect><text x="56" y="201" font-size="13" fill="#55704d" font-weight="700">向陽公園</text><rect x="235" y="22" width="78" height="42" rx="8" fill="#eadadb"></rect><text x="249" y="48" font-size="13" fill="#8b3f42" font-weight="700">藝文</text><circle cx="188" cy="110" r="9" fill="#8b3f42"></circle><text x="116" y="118" font-size="14" fill="#1f252b" font-weight="800">正光路133號</text></svg></div><figcaption>自製區位示意圖：以正光路 133 號為核心。</figcaption></figure>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>資料來源與限制</h2><p class="section-note">本報告為投資初評，不替代正式估價、謄本審查、現場測量或付費人流資料。</p></div>
+      <div class="grid two">
+        <article class="card pad"><h3 class="asset-title"><span class="dot"></span>主要來源</h3><div class="source-list">
+          <a href="https://dorts.tycg.gov.tw/cp.aspx?n=23132" target="_blank" rel="noreferrer">桃園市政府捷運工程局：捷運綠線 G10/G11 站位與路線資料</a>
+          <a href="https://land.tycg.gov.tw/cl.aspx?n=3997" target="_blank" rel="noreferrer">桃園市政府地政局：實價登錄專區</a>
+          <a href="https://estate.ltn.com.tw/article/14377" target="_blank" rel="noreferrer">自由時報地產天下：中路重劃區生活圈報導</a>
+          <a href="https://realtyprice.rakuya.com.tw/realprice/result?keyword=%E6%AD%A3%E5%85%89%E8%B7%AF&search=route&zipcode=330" target="_blank" rel="noreferrer">樂屋網：桃園區正光路實價公開行情</a>
+          <a href="https://twzipcode.com/zipcode-289111-%E6%A1%83%E5%9C%92%E5%B8%82%E6%A1%83%E5%9C%92%E5%8D%80%E4%B8%AD%E6%AD%A3%E9%87%8C%E6%AD%A3%E5%85%89%E8%B7%AF143%E5%B7%B722%E4%B9%8B3%E8%99%9F.html" target="_blank" rel="noreferrer">3+3 郵遞區號：正光路 133 號近鄰與 330060 區段資料</a>
+          <a href="https://opendata.tycg.gov.tw/datalist/search?category=%E4%BA%A4%E9%80%9A%E5%8F%8A%E9%80%9A%E8%A8%8A" target="_blank" rel="noreferrer">桃園資料開放平台：交通、YouBike、公車、車輛偵測資料</a>
+          <a href="https://semap.moi.gov.tw/STATSIGNAL/" target="_blank" rel="noreferrer">內政部智慧人流統計應用指標查詢系統：電信信令人流統計</a>
+        </div></article>
+        <article class="card pad"><h3 class="asset-title"><span class="dot wine"></span>限制聲明</h3><p>目前尚未取得 133 號謄本、地籍、建物型態、實測人流、租約與現場照片。所有價格均為公開行情與周邊樣本整理，不構成正式估價、收益保證或買賣依據。</p></article>
+      </div>
+      <p class="footer">內容適用範圍：正光路 133 號門牌點位，核心觀察約步行 5-10 分鐘圈，延伸比較約 3 公里。所有行情需在取得標的本體資料後重新校準。</p>
+    </section>
   </main>
+
+  <script>
+    const copy = {
+      public: "以 133 號為核心，公開資料推估的人流來自正光路主幹道、143 巷住宅聚落、文中路 47 巷社區，以及向陽公園/YouBike/公園活動節點。",
+      retail: "商用選址口徑下，133 號是否直接臨正光路、門面寬度、路口距離、機車停靠和招牌可視性，比區域平均人流更關鍵。",
+      commute: "通勤生活口徑下，133 號的區位支撐來自中路生活圈、向陽公園 YouBike、文中路住宅聚落與 G10/G11 外溢，可作為住宅租售情境的區位觀察。"
+    };
+    document.querySelectorAll(".map-btn").forEach((button)=>{
+      button.addEventListener("click",()=>{
+        const layer=button.dataset.layer;
+        document.querySelectorAll(".map-btn").forEach((item)=>item.classList.toggle("active",item===button));
+        document.querySelectorAll(".heat").forEach((heat)=>heat.classList.toggle("active",heat.dataset.heat===layer));
+        document.getElementById("heatText").textContent=copy[layer];
+      });
+    });
+  </script>
 </body>
 </html>

@@ -1,38 +1,38 @@
-{
-  "latest": "2026-06-23",
-  "reports": [
-    {
-      "date": "2026-06-07"
-    },
-    {
-      "date": "2026-06-08",
-      "label": "2026/06/08",
-      "marketResultDate": "2026-06-05"
-    },
-    {
-      "date": "2026-06-09",
-      "label": "2026/06/09",
-      "marketResultDate": "2026-06-09"
-    },
-    {
-      "date": "2026-06-12",
-      "label": "2026/06/12",
-      "marketResultDate": "2026-06-11"
-    },
-    {
-      "date": "2026-06-14",
-      "label": "2026/06/14",
-      "marketResultDate": "2026-06-12"
-    },
-    {
-      "date": "2026-06-20",
-      "label": "2026/06/20",
-      "marketResultDate": "2026-06-18"
-    },
-    {
-      "date": "2026-06-23",
-      "label": "2026/06/23",
-      "marketResultDate": "2026-06-22"
-    }
-  ]
+﻿{
+    "latest":  "2026-06-23",
+    "reports":  [
+                    {
+                        "date":  "2026-06-07"
+                    },
+                    {
+                        "date":  "2026-06-08",
+                        "label":  "2026/06/08",
+                        "marketResultDate":  "2026-06-05"
+                    },
+                    {
+                        "date":  "2026-06-09",
+                        "label":  "2026/06/09",
+                        "marketResultDate":  "2026-06-09"
+                    },
+                    {
+                        "date":  "2026-06-12",
+                        "label":  "2026/06/12",
+                        "marketResultDate":  "2026-06-11"
+                    },
+                    {
+                        "date":  "2026-06-14",
+                        "label":  "2026/06/14",
+                        "marketResultDate":  "2026-06-12"
+                    },
+                    {
+                        "date":  "2026-06-20",
+                        "label":  "2026/06/20",
+                        "marketResultDate":  "2026-06-18"
+                    },
+                    {
+                        "date":  "2026-06-23",
+                        "label":  "2026/06/23",
+                        "marketResultDate":  "2026-06-22"
+                    }
+                ]
 }
