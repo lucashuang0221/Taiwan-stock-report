@@ -384,6 +384,23 @@ def recommendation_rows(chips: dict, quotes: dict) -> list[dict]:
 
 
 def global_market_context() -> dict:
+    if MARKET_RESULT_DATE == "2026-06-29":
+        return {
+            "date": "2026-06-29",
+            "headline": "美股 6/29 反彈，S&P 500 上漲 1.2%、Nasdaq 上漲 2.1%、Dow 上漲 0.6%，科技股與 AI 題材回補帶動風險偏好回升。",
+            "items": [
+                "AP 匯整 6/29 美股收盤：S&P 500 收 7,440.43，上漲 86.41 點或 1.2%；Nasdaq 收 25,820.14，上漲 522.53 點或 2.1%；Dow 收 52,182.74，上漲 306.63 點或 0.6%。",
+                "WSJ 6/29 市場報導指出，Nasdaq 結束連跌並跳升約 2%，S&P 500 也終止五連跌，道瓊收在 52,000 點之上，反映前一週科技股賣壓後的修復買盤。",
+                "科技與 AI 類股反彈對台股電子權值、AI 伺服器、PCB、散熱與主動式台股 ETF 具正向外溢，但更適合解讀為跌深修復，不宜直接視為全面趨勢翻多。",
+                "油價因美伊地緣風險仍偏敏感，若 Brent 或能源價格再度急升，會壓抑高估值成長股的本益比修復空間。",
+                "對 6/30 台股盤前而言，國際面由上週科技股壓力轉為短線回補，有利開盤情緒，但仍需觀察外資是否同步回補台積電與 AI 權值。",
+            ],
+            "sources": [
+                ("AP: How major US stock indexes fared Monday 6/29/2026", "https://apnews.com/article/1c6aaade5352d970f8ce6769e2028fdc"),
+                ("WSJ: Stock Market News, June 29, 2026", "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-06-29-2026"),
+            ],
+        }
+
     if MARKET_RESULT_DATE == "2026-06-26":
         return {
             "date": "2026-06-26",
